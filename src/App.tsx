@@ -8,6 +8,7 @@ import Login from "./pages/Login.tsx";
 import Test from "./Test.tsx";
 import { authApi } from "./services/AuthService.ts";
 import { selectUserState, setUserAndAuth } from "./store/reducers/UserSlice.ts";
+import Main from "./pages/Main.tsx";
 
 function App() {
   const [isReadyForLoading, setIsReadyForLoading] = useState(false);
@@ -34,9 +35,10 @@ function App() {
                 <Routes>
                   <Route
                     path="/"
-                    element={userStore.isAuth ? <Test /> : <Login />}
+                    element={userStore.isAuth ? <Main /> : <Login />}
                   />
                   <Route path="/login" element={<Login />} />
+                  <Route path="/test" element={<Test />} />
                   {/* Add more routes as needed */}
                 </Routes>
               </main>
