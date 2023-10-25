@@ -9,13 +9,13 @@ import {
 } from "@mantine/core";
 import { IconChevronRight } from "@tabler/icons-react";
 import classes from "./NavbarNested.module.css";
-import { NavLink } from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 interface LinksGroupProps {
   icon: React.FC<any>;
   label: string;
   initiallyOpened?: boolean;
-  links?: { label: string; link: string }[];
+  links?: { label: string; link: string, modal?: boolean }[];
 }
 
 export function LinksGroup({
@@ -26,10 +26,16 @@ export function LinksGroup({
 }: LinksGroupProps) {
   const hasLinks = Array.isArray(links);
   const [opened, setOpened] = useState(initiallyOpened || false);
+  const location = useLocation();
   const items = (hasLinks ? links : []).map((link) => (
-    <NavLink to={link.link} className={classes.link} key={link.label}>
+    <Link
+      to={link.link}
+      className={classes.link}
+      key={link.label}
+      state={link.modal ? { background: location } : undefined}
+    >
       {link.label}
-    </NavLink>
+    </Link>
   ));
 
   return (

@@ -19,7 +19,8 @@ const mockdata = [
     initiallyOpened: true,
     links: [
       { label: "Overview", link: "/test" },
-      { label: "Forecasts", link: "/" },
+      { label: "ModalA", link: "/modal/a", modal: true },
+      { label: "ModalB", link: "/modal/b", modal: true },
       { label: "Outlook", link: "/" },
       { label: "Real time", link: "/" },
     ],
