@@ -7,6 +7,7 @@ import Login from "./pages/Login.tsx";
 import Test from "./Test.tsx";
 import { authApi } from "./services/AuthService.ts";
 import { selectUserState, setUserAndAuth } from "./store/reducers/UserSlice.ts";
+import { webSocketActions } from "./store/reducers/WebSocketSlice.ts"
 import Main from "./pages/Main.tsx";
 import { ModalLayout } from "./components/ModalLayout.tsx";
 
@@ -21,7 +22,10 @@ function App() {
     if (localStorage.getItem("token")) {
       triggerRefreshToken()
         .unwrap()
-        .then((payload) => store.dispatch(setUserAndAuth(payload)));
+        .then((payload) => {
+          store.dispatch(setUserAndAuth(payload));
+          store.dispatch(webSocketActions.startConnecting());
+        });
     } else {
       setIsReadyForLoading(true);
     }
