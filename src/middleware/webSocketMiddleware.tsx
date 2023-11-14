@@ -2,12 +2,13 @@ import { Middleware } from 'redux'
 import {io, Socket} from 'socket.io-client';
 import { webSocketActions, WsMessage } from '../store/reducers/WebSocketSlice.ts';
 
-enum WsEvent {
+export enum WsEvent {
   Subscribe = 'subscribe',
   SendMessage = 'send_message',
   RequestAllMessages = 'request_all_messages',
   SendAllMessages = 'send_all_messages',
-  ReceiveMessage = 'receive_message'
+  ReceiveMessage = 'receive_message',
+  TestEmit ='testEmit'
 }
 
 const webSocketMiddleware: Middleware = store => {
@@ -20,16 +21,20 @@ const webSocketMiddleware: Middleware = store => {
       if (!socket) {
         socket = io(import.meta.env.VITE_WS_URL, {
           withCredentials: true,
+          auth: {
+            token: localStorage.getItem("token")
+          }
         });
       }
-/*      socket = io(import.meta.env.VITE_WS_URL, {
-        withCredentials: true,
-      });*/
 
       socket.on('connect', () => {
         store.dispatch(webSocketActions.connectionEstablished());
-        socket.emit(WsEvent.Subscribe, {token: localStorage.getItem("token")});
+        //socket.emit(WsEvent.Subscribe, {token: localStorage.getItem("token")});
       })
+
+      socket.on("connect_error", (err) => {
+        console.log(err);
+      });
 
       socket.on(WsEvent.SendAllMessages, (messages: WsMessage[]) => {
         store.dispatch(webSocketActions.receiveAllMessages({ messages }));
@@ -42,6 +47,10 @@ const webSocketMiddleware: Middleware = store => {
 
     if (webSocketActions.submitMessage.match(action) && isConnectionEstablished) {
       socket.emit(WsEvent.SendMessage, action.payload.content);
+    }
+
+    if (webSocketActions.emit.match(action) && isConnectionEstablished) {
+      socket.emit(action.payload.type, action.payload.content);
     }
 
     next(action);

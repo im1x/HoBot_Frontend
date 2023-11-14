@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from "../store.ts";
+import {WsEvent} from "../../middleware/webSocketMiddleware.tsx";
 
 export interface WsState {
   messages: WsMessage[],
@@ -41,6 +42,12 @@ const webSocketSlice = createSlice({
       state.messages.push(action.payload.message);
     }),
     submitMessage: ((state, action: PayloadAction<{
+      content: string
+    }>) => {
+      return;
+    }),
+    emit: ((state, action: PayloadAction<{
+      type: WsEvent,
       content: string
     }>) => {
       return;
