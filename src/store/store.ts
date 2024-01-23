@@ -4,6 +4,7 @@ import { authApi } from "../services/AuthService.ts";
 import userReducer from "./reducers/UserSlice";
 import webSocketSlice from "./reducers/WebSocketSlice.ts";
 import webSocketMiddleware from "../middleware/webSocketMiddleware.tsx";
+import {settingsApi} from "../services/SettingsService.ts";
 
 export const store = configureStore({
   reducer: {
@@ -11,11 +12,12 @@ export const store = configureStore({
     user: userReducer,
     wsMessages: webSocketSlice.reducer,
     [authApi.reducerPath]: authApi.reducer,
+    [settingsApi.reducerPath]: settingsApi.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, webSocketMiddleware),
+    getDefaultMiddleware().concat(authApi.middleware, settingsApi.middleware, webSocketMiddleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

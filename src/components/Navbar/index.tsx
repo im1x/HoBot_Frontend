@@ -14,9 +14,17 @@ import classes from "./NavbarNested.module.css";
 const mockdata = [
   { label: "Dashboard", icon: IconGauge },
   {
-    label: "Market news",
+    label: "Настройки",
     icon: IconNotes,
     initiallyOpened: true,
+    links: [
+      { label: "Комманды", link: "/modal/commandsSettings", modal: true },
+    ],
+  },
+  {
+    label: "Market news",
+    icon: IconNotes,
+    initiallyOpened: false,
     links: [
       { label: "Overview", link: "/test" },
       { label: "ModalA", link: "/modal/a", modal: true },
