@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import {Provider} from "react-redux";
@@ -12,7 +12,7 @@ import App from "./App.tsx";
 import {BrowserRouter as Router} from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+  //<React.StrictMode>
     <Provider store={store}>
       <MantineProvider defaultColorScheme="dark">
         <Router>
@@ -21,5 +21,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </Router>
       </MantineProvider>
     </Provider>
-  </React.StrictMode>,
+  //</React.StrictMode>,
 );

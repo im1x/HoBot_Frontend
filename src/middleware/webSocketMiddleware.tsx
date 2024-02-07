@@ -1,6 +1,7 @@
 import { Middleware } from 'redux'
 import {io, Socket} from 'socket.io-client';
 import { webSocketActions, WsMessage } from '../store/reducers/WebSocketSlice.ts';
+import {SongRequestVideo, songRequestActions} from "../store/reducers/SongRequestSlice.ts";
 
 export enum WsEvent {
   Subscribe = 'subscribe',
@@ -8,7 +9,8 @@ export enum WsEvent {
   RequestAllMessages = 'request_all_messages',
   SendAllMessages = 'send_all_messages',
   ReceiveMessage = 'receive_message',
-  TestEmit ='testEmit'
+  TestEmit ='testEmit',
+  SongRequestAdded = 'SongRequestAdded'
 }
 
 const webSocketMiddleware: Middleware = store => {
@@ -43,6 +45,13 @@ const webSocketMiddleware: Middleware = store => {
       socket.on(WsEvent.ReceiveMessage, (message: WsMessage) => {
         store.dispatch(webSocketActions.receiveMessage({ message }));
       })
+
+      // song requests
+      socket.on(WsEvent.SongRequestAdded, (message: SongRequestVideo) => {
+        console.log("---------1---------");
+        console.log(message);
+        store.dispatch(songRequestActions.addVideo(message));
+      })
     }
 
     if (webSocketActions.submitMessage.match(action) && isConnectionEstablished) {
@@ -52,6 +61,8 @@ const webSocketMiddleware: Middleware = store => {
     if (webSocketActions.emit.match(action) && isConnectionEstablished) {
       socket.emit(action.payload.type, action.payload.content);
     }
+
+
 
     next(action);
   }

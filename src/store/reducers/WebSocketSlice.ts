@@ -44,12 +44,14 @@ const webSocketSlice = createSlice({
     submitMessage: ((state, action: PayloadAction<{
       content: string
     }>) => {
+      console.log(state, action);
       return;
     }),
     emit: ((state, action: PayloadAction<{
       type: WsEvent,
       content: string
     }>) => {
+      console.log(state, action);
       return;
     })
   },

@@ -5,6 +5,7 @@ import userReducer from "./reducers/UserSlice";
 import webSocketSlice from "./reducers/WebSocketSlice.ts";
 import webSocketMiddleware from "../middleware/webSocketMiddleware.tsx";
 import {settingsApi} from "../services/SettingsService.ts";
+import songRequestSlice from "./reducers/SongRequestSlice.ts";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     wsMessages: webSocketSlice.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [settingsApi.reducerPath]: settingsApi.reducer,
+    [songRequestSlice.reducerPath]: songRequestSlice.reducer
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

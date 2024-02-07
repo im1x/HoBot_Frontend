@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import YouTube, { YouTubeProps } from "react-youtube";
 import ReactPlayer from 'react-player/youtube';
 import { Button, TextInput } from "@mantine/core";
+import Playlist from "./Playlist.tsx";
 
 interface SongRequestPlayerProps {
   // add any necessary props here
@@ -16,6 +17,7 @@ const SongRequestPlayer: React.FC<SongRequestPlayerProps> = (props) => {
     // access to player in all event handlers via event.target
     //event.target.playVideo();
     console.log("onPlayerReady");
+    console.log(props);
     //event.target.setVolume(100);
     event.target.unMute();
   };
@@ -26,7 +28,6 @@ const SongRequestPlayer: React.FC<SongRequestPlayerProps> = (props) => {
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       origin: window.location.origin,
-      host: `${window.location.protocol}//www.youtube.com`,
       //host: "https://www.youtube-nocookie.com",
       autoplay: 1,
       controls: 0,
@@ -77,7 +78,9 @@ const SongRequestPlayer: React.FC<SongRequestPlayerProps> = (props) => {
                    playing={true}
                    muted={isMuted}
                    onStart={rpStart}/>
+    <Playlist/>
     </div>
+
   );
 };
 
