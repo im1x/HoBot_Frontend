@@ -1,12 +1,7 @@
-import {
-  selectSongRequestPlaylist,
-  SongRequestVideo,
-} from "../../store/reducers/SongRequestSlice.ts";
-import { useSelector } from "react-redux";
+import { SongRequestVideo } from "../../store/reducers/SongRequestSlice.ts";
+import React from "react";
 
-const Playlist = () => {
-  const playlist = useSelector(selectSongRequestPlaylist);
-
+const Playlist: React.FC<{ playlist: SongRequestVideo[] }> = ({ playlist }) => {
   return (
     <div>
       Playlist {playlist.length}

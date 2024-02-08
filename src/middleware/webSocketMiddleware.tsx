@@ -48,8 +48,6 @@ const webSocketMiddleware: Middleware = store => {
 
       // song requests
       socket.on(WsEvent.SongRequestAdded, (message: SongRequestVideo) => {
-        console.log("---------1---------");
-        console.log(message);
         store.dispatch(songRequestActions.addVideo(message));
       })
     }

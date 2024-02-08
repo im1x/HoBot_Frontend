@@ -4,7 +4,7 @@ import {Link, Outlet, useLocation} from "react-router-dom";
 import {Button} from "@mantine/core";
 import {store} from "../store/store.ts";
 import {WsEvent} from "../middleware/webSocketMiddleware.tsx";
-import Player from "../components/songRequest/Player.tsx";
+import SongRequest from "../components/songRequest";
 const Main = () => {
   const location = useLocation();
   return (
@@ -20,7 +20,7 @@ const Main = () => {
           <Outlet />
         </div>
         <Button onClick={() => store.dispatch(webSocketActions.emit({type: WsEvent.TestEmit, content: "test"}))} />
-        <Player />
+        <SongRequest />
       </div>
 
     </div>

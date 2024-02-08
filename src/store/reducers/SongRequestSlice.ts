@@ -13,9 +13,11 @@ export interface SongRequestVideo {
   end: number
 }
 
-interface SongRequestState {
+export interface SongRequestState {
   playlist: SongRequestVideo[],
   isPlaying: boolean,
+  volume: number,
+  progress: number,
   status: string
 }
 
@@ -34,6 +36,8 @@ const initialState: SongRequestState = {
     }
   ],
   isPlaying: false,
+  volume: 50,
+  progress: 0,
   status: "stop"
 };
 
@@ -43,15 +47,23 @@ const songRequestSlice = createSlice({
   reducers: {
 
     addVideo: (state, action: PayloadAction<SongRequestVideo>) => {
-      console.log("---------2---------");
-      console.log(action.payload);
       state.playlist.push(action.payload);
-      console.log("---------3---------");
-      console.log("Playlist: ", state.playlist);
     },
 
     skipVideo: (state) => {
       state.playlist.shift();
+    },
+
+    setVolume: (state, action: PayloadAction<number>) => {
+      state.volume = action.payload;
+    },
+
+    togglePlay: (state) => {
+      state.isPlaying = !state.isPlaying
+    },
+
+    setProgress: (state, action: PayloadAction<number>) => {
+      state.progress = action.payload
     }
 
 /*    setUser: (state, action: PayloadAction<IUser | null>) => {
@@ -77,9 +89,10 @@ const songRequestSlice = createSlice({
     },*/
   },
 });
-export const { addVideo, skipVideo } =
+export const { addVideo, skipVideo, setVolume, togglePlay, setProgress } =
   songRequestSlice.actions;
 export const songRequestActions = songRequestSlice.actions;
+export const selectSongRequest = (state: RootState) => state.songRequest;
 export const selectSongRequestPlaylist = (state: RootState) => state.songRequest.playlist;
 
 export default songRequestSlice;
