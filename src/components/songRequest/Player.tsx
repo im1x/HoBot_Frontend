@@ -4,23 +4,28 @@ import ReactPlayer from 'react-player/youtube';
 import {store} from "../../store/store.ts";
 import {setProgress} from "../../store/reducers/SongRequestSlice.ts";
 
-const SongRequestPlayer: React.FC<{videoId: string, volume: number, playing: boolean}> = ({ videoId, volume, playing}) => {
+const SongRequestPlayer: React.FC<{
+  videoId: string,
+  volume: number,
+  playing: boolean,
+  endVideo: () => void
+}> =({videoId, volume, playing, endVideo}) => {
   function rpStart() {
     console.log("rpStart");
     console.log(videoId)
   }
 
   return (
-      <ReactPlayer url='https://www.youtube.com/watch?v=LXb3EKWsInQ'
-                   playing={playing}
-                   volume={volume/100}
-                   onStart={rpStart}
-                   onPause={() => {}}
-                   onProgress={(event) => store.dispatch(setProgress(event.played))}
-                   style={{pointerEvents: 'none'}}
-      />
-
-  )
+    <ReactPlayer /*url='https://www.youtube.com/watch?v=LXb3EKWsInQ'*/
+      url={"https://www.youtube.com/watch?v=" + videoId}
+      playing={playing}
+      volume={volume / 100}
+      onStart={rpStart}
+      onEnded={endVideo}
+      onProgress={(event) => store.dispatch(setProgress(event.played))}
+      style={{ pointerEvents: "none" }}
+    />
+  );
 };
 
 export default SongRequestPlayer;

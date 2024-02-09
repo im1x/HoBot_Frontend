@@ -15,11 +15,14 @@ export interface SongRequestVideo {
 
 export interface SongRequestState {
   playlist: SongRequestVideo[],
+  currentVideo: string,
   isPlaying: boolean,
   volume: number,
   progress: number,
   status: string
 }
+
+const VIDEO_WAITING_ID = "uBBDMqZKagY";
 
 const initialState: SongRequestState = {
   playlist: [
@@ -35,6 +38,7 @@ const initialState: SongRequestState = {
       end: 0
     }
   ],
+  currentVideo: VIDEO_WAITING_ID,
   isPlaying: false,
   volume: 50,
   progress: 0,
@@ -48,10 +52,19 @@ const songRequestSlice = createSlice({
 
     addVideo: (state, action: PayloadAction<SongRequestVideo>) => {
       state.playlist.push(action.payload);
+      if (state.currentVideo === VIDEO_WAITING_ID) {
+        state.currentVideo = state.playlist[0].yt_id;
+      }
     },
 
     skipVideo: (state) => {
       state.playlist.shift();
+      if (state.playlist.length > 0) {
+        state.currentVideo = state.playlist[0].yt_id;
+      } else if (state.currentVideo !== VIDEO_WAITING_ID) {
+        state.currentVideo = VIDEO_WAITING_ID;
+      }
+
     },
 
     setVolume: (state, action: PayloadAction<number>) => {
@@ -59,6 +72,9 @@ const songRequestSlice = createSlice({
     },
 
     togglePlay: (state) => {
+      if (state.currentVideo === VIDEO_WAITING_ID && state.playlist.length > 0) {
+        state.currentVideo = state.playlist[0].yt_id
+      }
       state.isPlaying = !state.isPlaying
     },
 
