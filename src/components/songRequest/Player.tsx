@@ -16,7 +16,9 @@ const SongRequestPlayer: React.FC<{videoId: string, volume: number, playing: boo
                    volume={volume/100}
                    onStart={rpStart}
                    onPause={() => {}}
-                   onProgress={(event) => store.dispatch(setProgress(event.played))}/>
+                   onProgress={(event) => store.dispatch(setProgress(event.played))}
+                   style={{pointerEvents: 'none'}}
+      />
 
   )
 };
