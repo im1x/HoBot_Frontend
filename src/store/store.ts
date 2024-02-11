@@ -6,6 +6,7 @@ import webSocketSlice from "./reducers/WebSocketSlice.ts";
 import webSocketMiddleware from "../middleware/webSocketMiddleware.tsx";
 import {settingsApi} from "../services/SettingsService.ts";
 import songRequestSlice from "./reducers/SongRequestSlice.ts";
+import {songRequestApi} from "../services/SongRequest.ts";
 
 export const store = configureStore({
   reducer: {
@@ -14,12 +15,13 @@ export const store = configureStore({
     wsMessages: webSocketSlice.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [settingsApi.reducerPath]: settingsApi.reducer,
-    [songRequestSlice.reducerPath]: songRequestSlice.reducer
+    [songRequestSlice.reducerPath]: songRequestSlice.reducer,
+    [songRequestApi.reducerPath]: songRequestApi.reducer
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, settingsApi.middleware, webSocketMiddleware),
+    getDefaultMiddleware().concat(authApi.middleware, settingsApi.middleware, songRequestApi.middleware, webSocketMiddleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

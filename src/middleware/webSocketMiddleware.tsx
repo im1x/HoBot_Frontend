@@ -1,7 +1,8 @@
 import { Middleware } from 'redux'
 import {io, Socket} from 'socket.io-client';
 import { webSocketActions, WsMessage } from '../store/reducers/WebSocketSlice.ts';
-import {SongRequestVideo, songRequestActions} from "../store/reducers/SongRequestSlice.ts";
+import {songRequestActions} from "../store/reducers/SongRequestSlice.ts";
+import {SongRequestVideo} from "../models/SongRequest.ts";
 
 export enum WsEvent {
   Subscribe = 'subscribe',

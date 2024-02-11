@@ -4,16 +4,22 @@ import Controls from "./controls.tsx";
 import {useSelector} from "react-redux";
 import {selectSongRequest, songRequestActions} from "../../store/reducers/SongRequestSlice.ts";
 import {store} from "../../store/store.ts";
+import {songRequestApi} from "../../services/SongRequest.ts";
+import {useEffect} from "react";
 
 const SongRequest = () => {
   const sr = useSelector(selectSongRequest);
+  const {data: playlist} = songRequestApi.useGetPlaylistQuery();
+
+  useEffect(() => {
+    if (playlist) {
+      store.dispatch(songRequestActions.setPlaylist(playlist));
+    }
+  }, [playlist]);
+
 
   const endVideo = () => {
-    console.log("endVideo")
     store.dispatch(songRequestActions.skipVideo());
-/*    if (sr.playlist.length === 0) {
-      sr.currentVideo = VIDEO_WAITING_ID;
-    }*/
   }
 
   return (

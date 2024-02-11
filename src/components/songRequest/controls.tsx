@@ -1,8 +1,9 @@
 import {ActionIcon, Center, Flex, Paper, RingProgress, Slider} from "@mantine/core";
 import {IconPlayerPause, IconPlayerPlay, IconPlayerSkipForward, IconPlayerStop, IconVolume} from "@tabler/icons-react";
 import React from "react";
-import {songRequestActions, SongRequestState} from "../../store/reducers/SongRequestSlice.ts";
+import {songRequestActions} from "../../store/reducers/SongRequestSlice.ts";
 import {store} from "../../store/store.ts";
+import {SongRequestState} from "../../models/SongRequest.ts";
 
 const Controls: React.FC<{ songRequest: SongRequestState}> = ({ songRequest }) => {
   return (

@@ -1,5 +1,5 @@
-import { SongRequestVideo } from "../../store/reducers/SongRequestSlice.ts";
 import React from "react";
+import {SongRequestVideo} from "../../models/SongRequest.ts";
 
 const Playlist: React.FC<{ playlist: SongRequestVideo[] }> = ({ playlist }) => {
   return (
