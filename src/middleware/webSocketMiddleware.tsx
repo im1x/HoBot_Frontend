@@ -11,7 +11,9 @@ export enum WsEvent {
   SendAllMessages = 'send_all_messages',
   ReceiveMessage = 'receive_message',
   TestEmit ='testEmit',
-  SongRequestAdded = 'SongRequestAdded'
+  SongRequestAdded = 'SongRequestAdded',
+  SongRequestSetVolume = 'SongRequestSetVolume',
+  SongRequestSkipSong = 'SongRequestSkipSong'
 }
 
 const webSocketMiddleware: Middleware = store => {
@@ -48,9 +50,18 @@ const webSocketMiddleware: Middleware = store => {
       })
 
       // song requests
-      socket.on(WsEvent.SongRequestAdded, (message: SongRequestVideo) => {
-        store.dispatch(songRequestActions.addVideo(message));
+      socket.on(WsEvent.SongRequestAdded, (video: SongRequestVideo) => {
+        store.dispatch(songRequestActions.addVideo(video));
       })
+
+      socket.on(WsEvent.SongRequestSetVolume, (volume: number) => {
+        store.dispatch(songRequestActions.setVolume(volume));
+      })
+
+      socket.on(WsEvent.SongRequestSkipSong, () => {
+        store.dispatch(songRequestActions.skipVideo());
+      })
+
     }
 
     if (webSocketActions.submitMessage.match(action) && isConnectionEstablished) {
