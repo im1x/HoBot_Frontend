@@ -14,6 +14,12 @@ export const songRequestApi = createApi({
       }),
     }),
 
+    skipSong: builder.mutation<null, void>({
+      query: () => ({
+        url: "songrequest/skip",
+        method: "POST"
+      }),
+    }),
 
   }),
 });

@@ -10,6 +10,7 @@ import {useEffect} from "react";
 const SongRequest = () => {
   const sr = useSelector(selectSongRequest);
   const {data: playlist} = songRequestApi.useGetPlaylistQuery();
+  const [skipSong] = songRequestApi.useSkipSongMutation();
 
   useEffect(() => {
     if (playlist) {
@@ -18,14 +19,15 @@ const SongRequest = () => {
   }, [playlist]);
 
 
-  const endVideo = () => {
+  const endSkipVideo = () => {
     store.dispatch(songRequestActions.skipVideo());
+    skipSong();
   }
 
   return (
     <div>
-      <Player videoId={sr.currentVideo} volume={sr.volume} playing={sr.isPlaying} endVideo={endVideo}/>
-      <Controls songRequest={sr}/>
+      <Player videoId={sr.currentVideo} volume={sr.volume} playing={sr.isPlaying} endVideo={endSkipVideo}/>
+      <Controls songRequest={sr} skipVideo={endSkipVideo}/>
       <Playlist playlist={sr.playlist}/>
     </div>
   )

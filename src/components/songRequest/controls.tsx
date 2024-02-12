@@ -5,7 +5,7 @@ import {songRequestActions} from "../../store/reducers/SongRequestSlice.ts";
 import {store} from "../../store/store.ts";
 import {SongRequestState} from "../../models/SongRequest.ts";
 
-const Controls: React.FC<{ songRequest: SongRequestState}> = ({ songRequest }) => {
+const Controls: React.FC<{ songRequest: SongRequestState, skipVideo: () => void}> = ({ songRequest, skipVideo }) => {
   return (
     <Paper bg="rgba(0, 0, 0, .3)">
       Controls
@@ -36,7 +36,7 @@ const Controls: React.FC<{ songRequest: SongRequestState}> = ({ songRequest }) =
           }
         />
 
-        <ActionIcon variant="transparent" size="lg" aria-label="Skip" onClick={() => {store.dispatch(songRequestActions.skipVideo())}}>
+        <ActionIcon variant="transparent" size="lg" aria-label="Skip" onClick={skipVideo}>
           <IconPlayerSkipForward style={{ width: '100%', height: '100%' }} stroke={1.5} />
         </ActionIcon>
       </Flex>
