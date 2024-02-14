@@ -1,6 +1,6 @@
 import Player from "./Player.tsx";
 import Playlist from "./Playlist.tsx";
-import Controls from "./controls.tsx";
+import Controls from "./Controls.tsx";
 import {useSelector} from "react-redux";
 import {selectSongRequest, songRequestActions} from "../../store/reducers/SongRequestSlice.ts";
 import {store} from "../../store/store.ts";

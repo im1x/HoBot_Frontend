@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^2.0.1",
     "@tabler/icons-react": "^2.39.0",
     "@types/react-redux": "^7.1.26",
+    "dayjs": "^1.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-player": "^2.14.1",
