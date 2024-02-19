@@ -7,9 +7,7 @@ import {SongRequestState} from "../../models/SongRequest.ts";
 
 const Controls: React.FC<{ songRequest: SongRequestState, skipVideo: () => void}> = ({ songRequest, skipVideo }) => {
   return (
-    <Paper bg="rgba(0, 0, 0, .3)">
-      Controls
-
+    <Paper bg="rgba(0, 0, 0, .3)" withBorder py="sm">
       <Flex
         mih={50}
         gap="sm"

@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
 import {SongRequestVideo} from "../../models/SongRequest.ts";
-import {Anchor, Divider, Paper, Text, ThemeIcon, Tooltip} from "@mantine/core";
+import {Anchor, Box, Divider, Paper, Text, ThemeIcon, Tooltip} from "@mantine/core";
 import {IconClockHour4, IconEye} from "@tabler/icons-react";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
@@ -15,8 +15,8 @@ const Playlist: React.FC<{ playlist: SongRequestVideo[] }> = ({ playlist }) => {
     }, [playlist]);
 
   return (
-    <Paper bg="rgba(0, 0, 0, .3)">
-      {playlist.slice(0, 5).map((video: SongRequestVideo, index) => (
+    <Box bg="rgba(0, 0, 0, .3)" miw={440} maw={{ md: 440, lg: 700 }}>
+      {playlist.slice(0, 10).map((video: SongRequestVideo, index) => (
         <Tooltip
           color="gray"
           multiline
@@ -39,7 +39,7 @@ const Playlist: React.FC<{ playlist: SongRequestVideo[] }> = ({ playlist }) => {
             display="flex"
             key={index}
             bg={index === 0 ? "var(--mantine-color-blue-filled)" : undefined}>
-              <Anchor href={`https://youtube.com/watch?v=${video.yt_id}`} target="_blank" ml="xs" c="var(--mantine-color-text)">
+              <Anchor href={`https://youtube.com/watch?v=${video.yt_id}`} target="_blank" ml="xs" c="var(--mantine-color-text)" truncate="end" w={"100%"}>
                 {video.title}
               </Anchor>
               &nbsp;(
@@ -57,7 +57,7 @@ const Playlist: React.FC<{ playlist: SongRequestVideo[] }> = ({ playlist }) => {
       <Divider size="md"/>
       <Text span ml="md">Заполнение плейлиста: {playlist.length}\30</Text>
       <Text span ml="xl">(Общее время: {totalDuration()})</Text>
-    </Paper>
+    </Box>
   );
 };
 

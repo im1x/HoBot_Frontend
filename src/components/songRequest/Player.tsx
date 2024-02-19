@@ -17,6 +17,8 @@ const SongRequestPlayer: React.FC<{
 
   return (
     <ReactPlayer
+      width="440px"
+      height="240px"
       url={"https://www.youtube.com/watch?v=" + videoId}
       playing={playing}
       volume={volume / 100}
