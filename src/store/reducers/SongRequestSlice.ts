@@ -55,6 +55,11 @@ const songRequestSlice = createSlice({
 
     setPlaylist: (state, action: PayloadAction<SongRequestVideo[]>) => {
       state.playlist = action.payload;
+    },
+
+    clearPlaylist: (state) => {
+      state.playlist = [];
+      state.currentVideo = VIDEO_WAITING_ID;
     }
 
   },

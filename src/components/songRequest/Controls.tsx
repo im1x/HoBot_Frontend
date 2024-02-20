@@ -1,11 +1,24 @@
 import {ActionIcon, Center, Flex, Paper, RingProgress, Slider} from "@mantine/core";
-import {IconPlayerPause, IconPlayerPlay, IconPlayerSkipForward, IconPlayerStop, IconVolume} from "@tabler/icons-react";
+import {
+  IconPlayerPause,
+  IconPlayerPlay,
+  IconPlayerSkipForward,
+  IconPlayerStop,
+  IconPlaylistOff,
+  IconVolume
+} from "@tabler/icons-react";
 import React from "react";
 import {songRequestActions} from "../../store/reducers/SongRequestSlice.ts";
 import {store} from "../../store/store.ts";
 import {SongRequestState} from "../../models/SongRequest.ts";
+import {modals} from "@mantine/modals";
 
-const Controls: React.FC<{ songRequest: SongRequestState, skipVideo: () => void}> = ({ songRequest, skipVideo }) => {
+const Controls: React.FC<{ songRequest: SongRequestState, skipVideo: () => void, clearPlaylist: () => void}> = ({ songRequest, skipVideo, clearPlaylist }) => {
+  const openModalClearPlaylist = () => modals.openConfirmModal({
+    title: 'Очистить плейлист?',
+    labels: { confirm: 'Да', cancel: 'Отмена' },
+    onConfirm: () => clearPlaylist(),
+  });
   return (
     <Paper bg="rgba(0, 0, 0, .3)" withBorder py="sm">
       <Flex
@@ -15,6 +28,7 @@ const Controls: React.FC<{ songRequest: SongRequestState, skipVideo: () => void}
         align="center"
         direction="row"
         wrap="wrap"
+        pos={"relative"}
       >
         <ActionIcon variant="transparent" size="lg" aria-label="Delete" onClick={() => {}}>
           <IconPlayerStop style={{ width: '100%', height: '100%' }} stroke={1.5} />
@@ -36,6 +50,10 @@ const Controls: React.FC<{ songRequest: SongRequestState, skipVideo: () => void}
 
         <ActionIcon variant="transparent" size="lg" aria-label="Skip" onClick={skipVideo}>
           <IconPlayerSkipForward style={{ width: '100%', height: '100%' }} stroke={1.5} />
+        </ActionIcon>
+
+        <ActionIcon pos={"absolute"} top={-3} right={10} variant="transparent" size="lg" aria-label="Skip" onClick={openModalClearPlaylist}>
+          <IconPlaylistOff style={{ width: '100%', height: '100%' }} stroke={1.5} />
         </ActionIcon>
       </Flex>
 

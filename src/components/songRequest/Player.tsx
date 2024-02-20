@@ -1,4 +1,3 @@
-//react component for the song request player
 import React from "react";
 import ReactPlayer from 'react-player/youtube';
 import {store} from "../../store/store.ts";

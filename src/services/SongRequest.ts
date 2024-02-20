@@ -21,5 +21,12 @@ export const songRequestApi = createApi({
       }),
     }),
 
+    clearPlaylist: builder.mutation<null, void>({
+      query: () => ({
+        url: "songrequest/playlist",
+        method: "DELETE"
+      }),
+    }),
+
   }),
 });

@@ -13,6 +13,7 @@ const SongRequest = () => {
   const sr = useSelector(selectSongRequest);
   const {data: playlist} = songRequestApi.useGetPlaylistQuery();
   const [skipSong] = songRequestApi.useSkipSongMutation();
+  const [clearPlaylist] = songRequestApi.useClearPlaylistMutation();
   const isNarrowWindow = useMediaQuery(`(max-width: ${em(1060)})`);
 
   useEffect(() => {
@@ -22,17 +23,22 @@ const SongRequest = () => {
   }, [playlist]);
 
 
-  const endSkipVideo = () => {
+  const endSkipVideoHandler = () => {
     store.dispatch(songRequestActions.skipVideo());
     skipSong();
+  }
+
+  const clearPlaylistHandler = () => {
+    store.dispatch(songRequestActions.clearPlaylist());
+    clearPlaylist();
   }
 
   return (
     <Box w={"calc(100% - 173px)"}>
       <Box display={isNarrowWindow ? "block" : "flex"}>
         <Box w={440} h={408}>
-          <Player videoId={sr.currentVideo} volume={sr.volume} playing={sr.isPlaying} endVideo={endSkipVideo}/>
-          <Controls songRequest={sr} skipVideo={endSkipVideo}/>
+          <Player videoId={sr.currentVideo} volume={sr.volume} playing={sr.isPlaying} endVideo={endSkipVideoHandler}/>
+          <Controls songRequest={sr} skipVideo={endSkipVideoHandler} clearPlaylist={clearPlaylistHandler}/>
         </Box>
         <Box w={"calc(100% - 440px)"}>
           <Playlist playlist={sr.playlist}/>
