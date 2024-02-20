@@ -60,6 +60,11 @@ const songRequestSlice = createSlice({
     clearPlaylist: (state) => {
       state.playlist = [];
       state.currentVideo = VIDEO_WAITING_ID;
+    },
+
+    stopPlaying: (state) => {
+      state.isPlaying = false;
+      state.currentVideo = VIDEO_WAITING_ID;
     }
 
   },

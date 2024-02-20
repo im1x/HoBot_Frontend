@@ -30,7 +30,7 @@ const Controls: React.FC<{ songRequest: SongRequestState, skipVideo: () => void,
         wrap="wrap"
         pos={"relative"}
       >
-        <ActionIcon variant="transparent" size="lg" aria-label="Delete" onClick={() => {}}>
+        <ActionIcon variant="transparent" size="lg" aria-label="Stop" onClick={() => {store.dispatch(songRequestActions.stopPlaying())}}>
           <IconPlayerStop style={{ width: '100%', height: '100%' }} stroke={1.5} />
         </ActionIcon>
 
