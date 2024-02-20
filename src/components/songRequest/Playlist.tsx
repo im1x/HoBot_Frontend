@@ -22,6 +22,7 @@ const Playlist: React.FC<{ playlist: SongRequestVideo[] }> = ({ playlist }) => {
           multiline
           w={350}
           withArrow
+          key={index}
           transitionProps={{ duration: 200 }}
           label={
             <>
