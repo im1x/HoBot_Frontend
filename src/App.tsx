@@ -10,6 +10,7 @@ import { selectUserState, setUserAndAuth } from "./store/reducers/UserSlice.ts";
 import { webSocketActions } from "./store/reducers/WebSocketSlice.ts"
 import Main from "./pages/Main.tsx";
 import { ModalLayout } from "./components/ModalLayout.tsx";
+import PublicPlaylist from "./pages/PublicPlaylist.tsx";
 
 function App() {
   const [isReadyForLoading, setIsReadyForLoading] = useState(false);
@@ -40,6 +41,7 @@ function App() {
               <Route path="/modal/:id" element={<ModalLayout />} />
             </Route>
             <Route path="/login" element={<Login />} />
+            <Route path="/:id" element={<PublicPlaylist />} />
             <Route path="/test" element={<Test />} />
             {/* Add more routes as needed */}
           </Routes>

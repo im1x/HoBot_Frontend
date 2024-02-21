@@ -28,5 +28,11 @@ export const songRequestApi = createApi({
       }),
     }),
 
+    getPublicPlaylist: builder.query<SongRequestVideo[], string>({
+      query: (name) => ({
+        url: "songrequest/playlist/" + name,
+      }),
+    }),
+
   }),
 });
