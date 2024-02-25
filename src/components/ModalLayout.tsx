@@ -35,3 +35,5 @@ export const ModalLayout = () => {
 
   );
 };
+
+export default ModalLayout;
