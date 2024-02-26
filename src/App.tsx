@@ -4,12 +4,12 @@ import { useSelector } from "react-redux";
 import { store } from "./store/store.ts";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { authApi } from "./services/AuthService.ts";
-import { selectUserState, setUserAndAuth } from "./store/reducers/UserSlice.ts";
-import { webSocketActions } from "./store/reducers/WebSocketSlice.ts"
+import {clearAuth, selectUserState, setUserAndAuth} from "./store/reducers/UserSlice.ts";
+import { webSocketActions } from "./store/reducers/WebSocketSlice.ts";
+import ModalLayout from "./components/ModalLayout.tsx";
 const Login = lazy(() => import('./pages/Login'));
 const Test = lazy(() => import('./Test'));
 const Main = lazy(() => import('./pages/Main'));
-const ModalLayout = lazy(() => import('./components/ModalLayout'));
 const PublicPlaylist = lazy(() => import('./pages/PublicPlaylist'));
 
 function App() {
@@ -22,10 +22,14 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       triggerRefreshToken()
-        .unwrap()
-        .then((payload) => {
-          store.dispatch(setUserAndAuth(payload));
-          store.dispatch(webSocketActions.startConnecting());
+        .then((res) => {
+          if (res.isSuccess) {
+            store.dispatch(setUserAndAuth(res.data));
+            store.dispatch(webSocketActions.startConnecting());
+          } else {
+            store.dispatch(clearAuth());
+            setIsReadyForLoading(true);
+          }
         });
     } else {
       setIsReadyForLoading(true);
