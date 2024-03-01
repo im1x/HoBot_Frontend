@@ -1,19 +1,20 @@
 import { settingsApi } from "../../../../services/SettingsService.ts";
 import {
   ActionIcon,
+  Divider,
   Flex,
   Paper,
   Select,
-  Table,
+  Text,
+  Textarea,
   TextInput,
 } from "@mantine/core";
 import { hasLength, useForm } from "@mantine/form";
 import { SettingsCommand } from "../../../../models/response/SettingsResponse.ts";
 import React, { useCallback, useEffect, useState } from "react";
-import ReadOnlyRow from "./ReadOnlyRow.tsx";
-import EditableRow from "./EditableRow.tsx";
 import { notifications } from "@mantine/notifications";
 import { IconCheck, IconPlus, IconX } from "@tabler/icons-react";
+import CommandTable from "./CommandTable.tsx";
 
 export const CommandsSettings = () => {
   const { data: dropdownCmdList } = settingsApi.useGetCommandsDropdownQuery();
@@ -28,6 +29,7 @@ export const CommandsSettings = () => {
       alias: "",
       description: "",
       access_level: null,
+      payload: "",
     },
 
     validate: {
@@ -40,10 +42,7 @@ export const CommandsSettings = () => {
   const accessLevel = [
     { value: "0", label: "Все" },
     { value: "1", label: "Модераторы и владелец" },
-    {
-      value: "2",
-      label: "Владелец",
-    },
+    { value: "2", label: "Владелец" },
   ];
 
   useEffect(() => {
@@ -75,15 +74,6 @@ export const CommandsSettings = () => {
       formAdd.reset();
     });
   };
-
-  /*  const handleEdit = (event: React.MouseEvent<HTMLElement>, alias: string) => {
-      event.preventDefault();
-      const index = commands.findIndex((cmd) => cmd.alias === alias);
-      const elemConvert = { ...commands[index] };
-      elemConvert.access_level = elemConvert.access_level.toString();
-      formEdit.setValues(elemConvert);
-      setEditAlias(alias);
-    };*/
 
   const handleEdit = useCallback(
     (event: React.MouseEvent<HTMLElement>, alias: string) => {
@@ -117,7 +107,6 @@ export const CommandsSettings = () => {
   };
 
   const handleCancel = () => {
-    console.log("handleCancel");
     setEditAlias("");
   };
 
@@ -129,34 +118,19 @@ export const CommandsSettings = () => {
     if (
       formEdit.values.alias === updatedCommands[index].alias &&
       formEdit.values.access_level?.toString() ===
-        updatedCommands[index].access_level?.toString()
+        updatedCommands[index].access_level?.toString() &&
+      formEdit.values.payload === updatedCommands[index].payload
     ) {
       setEditAlias("");
       return;
     }
 
-    /*const condition1 = formEdit.values.alias === updatedCommands[index].alias;
-    const condition2 =
-      formEdit.values.access_level?.toString() ===
-      updatedCommands[index].access_level?.toString();
-
-    console.log("Condition 1:", condition1);
-    console.log("Condition 2:", condition2);
-
-    if (condition1 || condition2) {
-      setEditAlias("");
-      return;
-    }*/
-
-    console.log(formEdit.values);
-    console.log(updatedCommands[index]);
-    console.log(formEdit.values.access_level?.toString());
-    console.log(updatedCommands[index].access_level?.toString());
-
     updatedCommands[index] = formEdit.values;
     updatedCommands[index].access_level = parseInt(
       updatedCommands[index].access_level?.toString() || "0",
     );
+    updatedCommands[index].payload = formEdit.values.payload || "";
+
     editCommand({ alias: editAlias, cmd: updatedCommands[index] }).then(
       (result) => {
         if ("data" in result) {
@@ -179,52 +153,87 @@ export const CommandsSettings = () => {
     setEditAlias("");
   };
 
+  const isCommonCommandExists = () => {
+    return commands.some((command) => command.payload === "");
+  };
+
+  const isTextCommandExists = () => {
+    return commands.some((command) => command.payload !== "");
+  };
+
+  const headers1 = [
+    { title: "Описание", width: "40%" },
+    { title: "Команда", width: "15%" },
+    { title: "Уровень доступа", width: "40%" },
+    { title: "Действия", width: "5%" },
+  ];
+
+  const headers2 = [
+    { title: "Описание", width: "40%" },
+    { title: "Команда", width: "15%" },
+    { title: "Текст", width: "40%" },
+    { title: "Действия", width: "5%" },
+  ];
+
   return (
     <>
-      <form onSubmit={handleFormEdit}>
-        <Table>
-          <Table.Thead>
-            <Table.Tr>
-              <Table.Th w="25%">Описание</Table.Th>
-              <Table.Th>Команда</Table.Th>
-              <Table.Th>Уровень доступа</Table.Th>
-              <Table.Th>Действия</Table.Th>
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody>
-            {commands.map((command) =>
-              editAlias !== command.alias ? (
-                <ReadOnlyRow
-                  key={command.alias}
-                  cmd={command}
-                  handleEdit={handleEdit}
-                  handleDelete={handleDelete}
-                />
-              ) : (
-                <EditableRow
-                  key={command.alias}
-                  cmd={command}
-                  handleCancel={handleCancel}
-                  form={formEdit}
-                />
-              ),
-            )}
-          </Table.Tbody>
-        </Table>
-      </form>
+      {isCommonCommandExists() && (
+        <>
+          <Divider
+            size="lg"
+            label={<Text size="lg">Основные команды</Text>}
+            labelPosition="center"
+          />
+          <CommandTable
+            headers={headers1}
+            commands={commands
+              .filter((command) => command.payload === "")
+              .sort((a, b) => a.alias.localeCompare(b.alias))}
+            editAlias={editAlias}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            form={formEdit}
+            onSubmit={handleFormEdit}
+            handleCancel={handleCancel}
+          />
+        </>
+      )}
+
+      {isTextCommandExists() && (
+        <>
+          <Divider
+            mt="xl"
+            size="lg"
+            label={<Text size="lg">Текстовые команды</Text>}
+            labelPosition="center"
+          />
+          <CommandTable
+            headers={headers2}
+            commands={commands
+              .filter((command) => command.payload !== "")
+              .sort((a, b) => a.alias.localeCompare(b.alias))}
+            editAlias={editAlias}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            form={formEdit}
+            onSubmit={handleFormEdit}
+            handleCancel={handleCancel}
+          />
+        </>
+      )}
 
       <form
         onSubmit={formAdd.onSubmit(async () => {
           await handleSubmitAdd();
         })}
       >
-        <Paper shadow="x" withBorder p="sm">
+        <Paper mt="xl" shadow="x" withBorder p="sm">
           <Flex
             gap="md"
             justify="space-between"
             align="center"
             direction="row"
-            wrap="wrap"
+            wrap="nowrap"
           >
             <Select
               placeholder="Выберите действие"
@@ -235,11 +244,18 @@ export const CommandsSettings = () => {
               placeholder="Введите новую команду"
               {...formAdd.getInputProps("alias")}
             />
-            <Select
-              placeholder="Уровень доступа"
-              data={accessLevel}
-              {...formAdd.getInputProps("access_level")}
-            />
+            {formAdd.values.command === "Print_Text" ? (
+              <Textarea
+                placeholder="Текст"
+                {...formAdd.getInputProps("payload")}
+              />
+            ) : (
+              <Select
+                placeholder="Уровень доступа"
+                data={accessLevel}
+                {...formAdd.getInputProps("access_level")}
+              />
+            )}
             <ActionIcon
               type="submit"
               variant="filled"

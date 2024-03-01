@@ -1,6 +1,6 @@
 import { SettingsCommand } from "../../../../models/response/SettingsResponse.ts";
 import React from "react";
-import {ActionIcon, Select, Table, TextInput} from "@mantine/core";
+import {ActionIcon, Select, Table, Textarea, TextInput} from "@mantine/core";
 import {IconCheck, IconPencilOff} from "@tabler/icons-react";
 import {UseFormReturnType} from "@mantine/form";
 
@@ -17,7 +17,9 @@ const EditableRow: React.FC<{
           <TextInput {...form.getInputProps("alias")} />
         </Table.Td>
         <Table.Td>
-          <Select data={accessLevel} {...form.getInputProps("access_level")} />
+          {cmd.payload === "" ?
+            <Select data={accessLevel} {...form.getInputProps("access_level")} /> :
+            <Textarea {...form.getInputProps("payload")} />}
         </Table.Td>
         <Table.Td>
           <ActionIcon type="submit" variant="filled" aria-label="Edit">

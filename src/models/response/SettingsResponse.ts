@@ -12,4 +12,5 @@ export interface SettingsCommand {
   alias: string;
   description?: string;
   access_level: number | string | null;
+  payload?: string;
 }

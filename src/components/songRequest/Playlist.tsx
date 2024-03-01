@@ -5,8 +5,8 @@ import {IconClockHour4, IconEye} from "@tabler/icons-react";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 
+dayjs.extend(duration)
 const Playlist: React.FC<{ playlist: SongRequestVideo[] }> = ({ playlist }) => {
-  dayjs.extend(duration)
 
     const totalDuration = useCallback(() => {
       const totalSeconds = playlist.reduce((a, b) => a + b.length, 0);

@@ -13,7 +13,7 @@ const ReadOnlyRow: React.FC<{
     <Table.Tr key={cmd.alias}>
       <Table.Td>{cmd.description}</Table.Td>
       <Table.Td>{cmd.alias}</Table.Td>
-      <Table.Td>{accessLevel[cmd.access_level as number]}</Table.Td>
+      {cmd.payload === "" ? <Table.Td>{accessLevel[cmd.access_level as number]}</Table.Td> : <Table.Td>{cmd.payload}</Table.Td>}
       <Table.Td>
         <ActionIcon variant="filled" aria-label="Edit" onClick={(event) => handleEdit(event, cmd.alias)}>
           <IconPencil style={{ width: '70%', height: '70%' }} stroke={1.5} />
