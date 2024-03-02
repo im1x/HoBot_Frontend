@@ -1,57 +1,27 @@
 import { ScrollArea } from "@mantine/core";
 import {
   IconAdjustments,
-  IconCalendarStats,
-  IconFileAnalytics,
-  IconGauge,
-  IconLock,
-  IconNotes,
-  IconPresentationAnalytics,
+  IconHelp,
 } from "@tabler/icons-react";
 import { LinksGroup } from "./NavbarLinksGroup.tsx";
 import classes from "./NavbarNested.module.css";
 
 const mockdata = [
-  { label: "Dashboard", icon: IconGauge },
   {
     label: "Настройки",
-    icon: IconNotes,
+    icon: IconAdjustments,
     initiallyOpened: true,
     links: [
       { label: "Комманды", link: "/modal/commandsSettings", modal: true },
     ],
   },
   {
-    label: "Market news",
-    icon: IconNotes,
-    initiallyOpened: false,
+    label: "Помощь",
+    icon: IconHelp,
+    initiallyOpened: true,
     links: [
-      { label: "Overview", link: "/test" },
-      { label: "ModalA", link: "/modal/a", modal: true },
-      { label: "ModalB", link: "/modal/b", modal: true },
-      { label: "Outlook", link: "/" },
-      { label: "Real time", link: "/" },
-    ],
-  },
-  {
-    label: "Releases",
-    icon: IconCalendarStats,
-    links: [
-      { label: "Upcoming releases", link: "/" },
-      { label: "Previous releases", link: "/" },
-      { label: "Releases schedule", link: "/" },
-    ],
-  },
-  { label: "Analytics", icon: IconPresentationAnalytics },
-  { label: "Contracts", icon: IconFileAnalytics },
-  { label: "Settings", icon: IconAdjustments },
-  {
-    label: "Security",
-    icon: IconLock,
-    links: [
-      { label: "Enable 2FA", link: "/" },
-      { label: "Change password", link: "/" },
-      { label: "Recovery codes", link: "/test" },
+      { label: "О проекте", link: "/test" },
+      { label: "Обратная связь", link: "/modal/a", modal: true },
     ],
   },
 ];

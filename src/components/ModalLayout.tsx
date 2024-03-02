@@ -1,7 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
 import {Modal} from "@mantine/core";
-import { A } from "./modals/A.tsx";
-import { B } from "./modals/B.tsx";
 import { ReactNode } from "react";
 import {CommandsSettings} from "./modals/settings/commands/CommandsSettings.tsx";
 
@@ -18,8 +16,6 @@ export const ModalLayout = () => {
     return null;
   }
   const contentComponents: ContentComponents = {
-    a: {modal: <A />, label: "A"},
-    b: {modal: <B />, label: "B"},
     commandsSettings: {modal: <CommandsSettings />, label: "Настройки команд"},
     // Add more mappings for other parameters
   };
