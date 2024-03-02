@@ -46,6 +46,7 @@ export const CommandsSettings = () => {
   ];
 
   useEffect(() => {
+    console.log("==================================");
     if (commandsReq) {
       setCommands(commandsReq);
     }

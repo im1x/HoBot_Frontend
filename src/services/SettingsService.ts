@@ -6,12 +6,14 @@ import {SettingsCommand, SettingsCommandsList} from "../models/response/Settings
 export const settingsApi = createApi({
   reducerPath: "settingsApi",
   baseQuery: BaseQueryWithReAuth,
+  tagTypes: ['commands'],
   endpoints: (builder) => ({
 
     getCommands: builder.query<SettingsCommand[], void>({
       query: () => ({
         url: "settings/commands",
       }),
+      providesTags: ["commands"],
     }),
 
     getCommandsDropdown: builder.query<SettingsCommandsList[], void>({
@@ -26,6 +28,7 @@ export const settingsApi = createApi({
         method: "POST",
         body: cmd,
       }),
+      invalidatesTags: ['commands'],
     }),
 
     editCommand: builder.mutation<SettingsCommand[], {alias: string, cmd: SettingsCommand}>({
@@ -34,6 +37,7 @@ export const settingsApi = createApi({
         method: "PUT",
         body: cmd,
       }),
+      invalidatesTags: ['commands'],
     }),
 
     deleteCommand: builder.mutation<SettingsCommand[], string>({
@@ -41,6 +45,7 @@ export const settingsApi = createApi({
         url: `/settings/commands/${alias}`,
         method: "DELETE",
       }),
+      invalidatesTags: ['commands'],
     }),
 
   }),
