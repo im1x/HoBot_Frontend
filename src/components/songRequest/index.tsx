@@ -4,7 +4,7 @@ import Controls from "./Controls.tsx";
 import {useSelector} from "react-redux";
 import {selectSongRequest, songRequestActions} from "../../store/reducers/SongRequestSlice.ts";
 import {store} from "../../store/store.ts";
-import {songRequestApi} from "../../services/SongRequest.ts";
+import {songRequestApi} from "../../services/SongRequestService.ts";
 import { useEffect } from "react";
 import {Box, em} from "@mantine/core";
 import {useMediaQuery} from "@mantine/hooks";

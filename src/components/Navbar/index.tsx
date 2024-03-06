@@ -21,7 +21,7 @@ const mockdata = [
     initiallyOpened: true,
     links: [
       { label: "О проекте", link: "/test" },
-      { label: "Обратная связь", link: "/modal/a", modal: true },
+      { label: "Обратная связь", link: "/modal/feedback", modal: true },
     ],
   },
 ];

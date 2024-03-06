@@ -1,5 +1,5 @@
 import {useParams} from "react-router-dom";
-import {songRequestApi} from "../services/SongRequest.ts";
+import {songRequestApi} from "../services/SongRequestService.ts";
 import { useEffect, useState } from "react";
 import {Anchor, Table} from "@mantine/core";
 import {SongRequestVideo} from "../models/SongRequest.ts";
