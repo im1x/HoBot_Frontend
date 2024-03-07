@@ -31,7 +31,7 @@ const Feedback = () => {
     <>
       <Textarea resize="vertical" placeholder="Напишите нам! Что угодно 😀" size="md" value={text} onChange={(e) => setText(e.target.value)}/>
       <Center mt="md">
-        <Button onClick={handleSubmit}>Отправить</Button>
+        <Button disabled={text === ""} onClick={handleSubmit}>Отправить</Button>
       </Center>
     </>
   )
