@@ -20,7 +20,7 @@ const mockdata = [
     icon: IconHelp,
     initiallyOpened: true,
     links: [
-      { label: "О проекте", link: "/test" },
+      { label: "О проекте", link: "/modal/about", modal: true },
       { label: "Обратная связь", link: "/modal/feedback", modal: true },
     ],
   },

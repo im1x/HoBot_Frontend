@@ -3,6 +3,7 @@ import {Modal} from "@mantine/core";
 import { ReactNode } from "react";
 import {CommandsSettings} from "./modals/settings/commands/CommandsSettings.tsx";
 import Feedback from "./modals/Feedback.tsx";
+import About from "./modals/About.tsx";
 
 type ContentComponents = {
   [key: string]: {modal: ReactNode, label: string};
@@ -19,6 +20,7 @@ export const ModalLayout = () => {
   const contentComponents: ContentComponents = {
     commandsSettings: {modal: <CommandsSettings />, label: "Настройки команд"},
     feedback: {modal: <Feedback />, label: "Обратная связь"},
+    about: {modal: <About />, label: "О проекте"},
     // Add more mappings for other parameters
   };
 
