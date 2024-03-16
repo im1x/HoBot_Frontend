@@ -16,9 +16,11 @@ import {modals} from "@mantine/modals";
 const Controls: React.FC<{ songRequest: SongRequestState, skipVideo: () => void, clearPlaylist: () => void}> = ({ songRequest, skipVideo, clearPlaylist }) => {
   const openModalClearPlaylist = () => modals.openConfirmModal({
     title: 'Очистить плейлист?',
+    centered: true,
     labels: { confirm: 'Да', cancel: 'Отмена' },
     onConfirm: () => clearPlaylist(),
   });
+  
   return (
     <Paper bg="rgba(0, 0, 0, .3)" withBorder py="sm">
       <Flex

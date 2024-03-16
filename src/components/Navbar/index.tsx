@@ -4,7 +4,6 @@ import {
   IconHelp,
 } from "@tabler/icons-react";
 import { LinksGroup } from "./NavbarLinksGroup.tsx";
-import classes from "./NavbarNested.module.css";
 
 const mockdata = [
   {
@@ -32,7 +31,7 @@ export default function NavbarNested() {
   ));
 
   return (
-    <nav className={classes.navbar}>
+    <nav>
       <ScrollArea>
         <div>{links}</div>
       </ScrollArea>
