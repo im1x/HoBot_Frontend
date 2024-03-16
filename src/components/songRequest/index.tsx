@@ -14,7 +14,7 @@ const SongRequest = () => {
   const {data: playlist} = songRequestApi.useGetPlaylistQuery();
   const [skipSong] = songRequestApi.useSkipSongMutation();
   const [clearPlaylist] = songRequestApi.useClearPlaylistMutation();
-  const isNarrowWindow = useMediaQuery(`(max-width: ${em(1070)})`);
+  const isNarrowWindow = useMediaQuery(`(max-width: ${em(1108)})`);
 
   useEffect(() => {
     if (playlist) {
@@ -34,13 +34,13 @@ const SongRequest = () => {
   }
 
   return (
-    <Box w={"calc(100% - 173px)"}>
+    <Box w={"calc(100% - 205px)"}> {/*205 - navbar width + space*/}
       <Box display={isNarrowWindow ? "block" : "flex"}>
         <Box w={440} h={408} ml="sm" mt="sm">
           <Player videoId={sr.currentVideo} volume={sr.volume} playing={sr.isPlaying} endVideo={endSkipVideoHandler}/>
           <Controls songRequest={sr} skipVideo={endSkipVideoHandler} clearPlaylist={clearPlaylistHandler}/>
         </Box>
-        <Box w={"calc(100% - 440px)"} ml="sm" mt="sm">
+        <Box w={"calc(100% - 440px)"} ml="sm" mt="sm"> {/*440 - player width*/}
           <Playlist playlist={sr.playlist}/>
         </Box>
       </Box>

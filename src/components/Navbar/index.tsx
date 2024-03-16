@@ -33,7 +33,7 @@ export default function NavbarNested() {
 
   return (
     <nav className={classes.navbar}>
-      <ScrollArea className={classes.links}>
+      <ScrollArea>
         <div>{links}</div>
       </ScrollArea>
     </nav>

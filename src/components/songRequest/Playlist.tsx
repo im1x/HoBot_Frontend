@@ -15,7 +15,7 @@ const Playlist: React.FC<{ playlist: SongRequestVideo[] }> = ({ playlist }) => {
     }, [playlist]);
 
   return (
-    <Box bg="rgba(0, 0, 0, .3)" miw={440} maw={{ md: 440, lg: 700, xl: 920 }}>
+    <Box bg="rgba(0, 0, 0, .3)" miw={440}>
       {playlist.slice(0, 10).map((video: SongRequestVideo, index) => (
         <Tooltip
           color="gray"
