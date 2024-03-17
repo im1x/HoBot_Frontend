@@ -10,13 +10,15 @@ import {
   Button,
   Checkbox,
   Anchor,
-  Stack,
+  Stack, Image, Center,
 } from '@mantine/core';
 import {authApi} from "../services/AuthService.ts";
 import {IRegistration} from "../models/Registration.ts";
 import {store} from "../store/store.ts";
 import {setUserAndAuth} from "../store/reducers/UserSlice.ts";
 import {useEffect} from "react";
+import {Link} from "react-router-dom";
+import vkplLogo from "../assets/vkpl.png";
 const Login = () => {
   const [registerUser, { data: newUser, isSuccess: regIsSuccess }] = authApi.useRegisterMutation();
   const [loginUser, { data: user, isSuccess: loginIsSuccess , error:LoginError}] = authApi.useLoginMutation();
@@ -130,6 +132,26 @@ const Login = () => {
             </Button>
           </Group>
         </form>
+      </Paper>
+
+      <Paper maw={400} mx="auto" radius="md" p="xl" withBorder>
+        <Text size="lg" fw={500} mb="lg">
+          Это бот дл VK Play Live. Он позволяет зрителям заказывать видео с YouTube, а стримерам создавать свои команды.
+        </Text>
+        <Center>
+          <Link to="https://auth.vkplay.live/app/oauth2/authorize?client_id=c99moea4ax1945tr&redirect_uri=http://localhost:5173/api/vkpl&response_type=code">
+            <Button size="lg" color="#0077ff">
+              <Image
+                mr="md"
+                w="45px"
+                fit="contain"
+                src={vkplLogo}
+              />
+              Войти
+            </Button>
+          </Link>
+        </Center>
+
       </Paper>
   </>
 
