@@ -40,18 +40,12 @@ export const authApi = createApi({
       }),
     }),
 
-    logout: builder.mutation({
+    logout: builder.mutation<void, void> ({
       query: () => ({
         url: "/logout",
         method: "POST",
       }),
     }),
 
-    getTestData: builder.query<string, void>({
-      query: () => ({
-        url: "/users",
-        responseHandler: (response) => response.text(),
-      }),
-    }),
   }),
 });

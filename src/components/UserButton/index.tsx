@@ -13,8 +13,14 @@ import {
 } from "@tabler/icons-react";
 import classes from "./UserButton.module.css";
 import {modals} from "@mantine/modals";
+import {authApi} from "../../services/AuthService.ts";
 
 const UserButton = () => {
+  const [logout] = authApi.useLogoutMutation();
+
+  const handleLogout = () => {
+    logout().then(() => window.location.reload());
+  }
 
   const openModalDeleteAccount = () =>
     modals.openConfirmModal({
@@ -62,6 +68,7 @@ const UserButton = () => {
         <Menu.Dropdown>
           <Menu.Item
             leftSection={<IconLogout style={{ width: rem(14), height: rem(14) }} />}
+            onClick={handleLogout}
           >
             Выход
           </Menu.Item>
