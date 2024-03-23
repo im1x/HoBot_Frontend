@@ -2,7 +2,7 @@
     display: block;
     width: 100%;
     margin-top: auto;
-    padding: var(--mantine-spacing-md);
+    padding: var(--mantine-spacing-sm);
     color: light-dark(var(--mantine-color-black), var(--mantine-color-dark-0));
     border-top: 1px solid var(--mantine-color-dark-4);
 

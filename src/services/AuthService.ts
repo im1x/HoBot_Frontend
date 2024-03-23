@@ -21,5 +21,12 @@ export const authApi = createApi({
       }),
     }),
 
+    wipe: builder.mutation<void, void> ({
+      query: () => ({
+        url: "/user",
+        method: "DELETE",
+      }),
+    })
+
   }),
 });

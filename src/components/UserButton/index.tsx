@@ -20,12 +20,20 @@ import {selectUserState} from "../../store/reducers/UserSlice.ts";
 const UserButton = () => {
   const userStore = useSelector(selectUserState);
   const [logout] = authApi.useLogoutMutation();
+  const [wipe] = authApi.useWipeMutation();
 
   const handleLogout = () => {
     logout().then(() => {
       localStorage.removeItem("token");
       window.location.reload();
     });
+  }
+
+    const handleWipe = () => {
+      wipe().then(() => {
+        localStorage.removeItem("token");
+        window.location.reload();
+      });
   }
 
   const openModalDeleteAccount = () =>
@@ -39,7 +47,7 @@ const UserButton = () => {
       ),
       labels: { confirm: 'Удалить аккаунт', cancel: "Не удалять" },
       confirmProps: { color: 'red' },
-      onConfirm: () => console.log('Confirmed'),
+      onConfirm: () => handleWipe(),
     });
 
   return (
@@ -56,10 +64,6 @@ const UserButton = () => {
               <div style={{ flex: 1 }}>
                 <Text size="sm" fw={500}>
                   {userStore?.user?.channel}
-                </Text>
-
-                <Text c="dimmed" size="xs">
-                  {userStore?.user?.nick}
                 </Text>
               </div>
 
