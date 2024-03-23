@@ -1,15 +1,12 @@
 import {BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError} from "@reduxjs/toolkit/query/react";
 import {AuthResponse} from "../models/response/AuthResponse.ts";
 import {store} from "../store/store.ts";
-import {clearAuth, setUserAndAuth} from "../store/reducers/UserSlice.ts";
+import {clearAuth, setAuth} from "../store/reducers/UserSlice.ts";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL,
   prepareHeaders: (headers, { /*getState,*/ endpoint }) => {
-    //const user = (getState() as RootState).user.currentUser
-
-    //if (user && endpoint !== 'refresh') {
-    if (endpoint !== "refreshToken") {
+    if (endpoint !== "refresh") {
       headers.set("Authorization", `Bearer ${localStorage.getItem("token")}`);
     }
     return headers;
@@ -28,11 +25,10 @@ export const BaseQueryWithReAuth: BaseQueryFn<
     if (refreshResult.data) {
       // store the new token
       //api.dispatch(tokenReceived(refreshResult.data))
-      store.dispatch(setUserAndAuth(refreshResult.data))
+      store.dispatch(setAuth(refreshResult.data))
       // retry the initial query
       result = await baseQuery(args, api, extraOptions)
     } else {
-      //api.dispatch(loggedOut())
       store.dispatch(clearAuth())
     }
   }

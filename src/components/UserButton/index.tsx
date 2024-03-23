@@ -14,12 +14,18 @@ import {
 import classes from "./UserButton.module.css";
 import {modals} from "@mantine/modals";
 import {authApi} from "../../services/AuthService.ts";
+import {useSelector} from "react-redux";
+import {selectUserState} from "../../store/reducers/UserSlice.ts";
 
 const UserButton = () => {
+  const userStore = useSelector(selectUserState);
   const [logout] = authApi.useLogoutMutation();
 
   const handleLogout = () => {
-    logout().then(() => window.location.reload());
+    logout().then(() => {
+      localStorage.removeItem("token");
+      window.location.reload();
+    });
   }
 
   const openModalDeleteAccount = () =>
@@ -43,17 +49,17 @@ const UserButton = () => {
           <UnstyledButton className={classes.user}>
             <Group>
               <Avatar
-                src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"
+                src={userStore?.user?.avatar_url}
                 radius="xl"
               />
 
               <div style={{ flex: 1 }}>
                 <Text size="sm" fw={500}>
-                  Harriette
+                  {userStore?.user?.channel}
                 </Text>
 
                 <Text c="dimmed" size="xs">
-                  hspoonlicker
+                  {userStore?.user?.nick}
                 </Text>
               </div>
 
