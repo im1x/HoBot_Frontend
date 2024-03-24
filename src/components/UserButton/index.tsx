@@ -63,7 +63,7 @@ const UserButton = () => {
 
               <div style={{ flex: 1 }}>
                 <Text size="sm" fw={500}>
-                  {userStore?.user?.channel}
+                  {userStore?.user?.nick}
                 </Text>
               </div>
 
