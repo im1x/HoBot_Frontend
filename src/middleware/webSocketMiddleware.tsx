@@ -5,12 +5,9 @@ import {songRequestActions} from "../store/reducers/SongRequestSlice.ts";
 import {SongRequestVideo} from "../models/SongRequest.ts";
 
 export enum WsEvent {
-  Subscribe = 'subscribe',
   SendMessage = 'send_message',
-  RequestAllMessages = 'request_all_messages',
   SendAllMessages = 'send_all_messages',
   ReceiveMessage = 'receive_message',
-  TestEmit ='testEmit',
   SongRequestAdded = 'SongRequestAdded',
   SongRequestSetVolume = 'SongRequestSetVolume',
   SongRequestSkipSong = 'SongRequestSkipSong',
@@ -21,7 +18,7 @@ const webSocketMiddleware: Middleware = store => {
   let socket: Socket;
 
   return next => action => {
-    const isConnectionEstablished = socket/* && store.getState().chat.isConnected*/;
+    const isConnectionEstablished = socket;
 
     if (webSocketActions.startConnecting.match(action)) {
       if (!socket) {
@@ -35,7 +32,6 @@ const webSocketMiddleware: Middleware = store => {
 
       socket.on('connect', () => {
         store.dispatch(webSocketActions.connectionEstablished());
-        //socket.emit(WsEvent.Subscribe, {token: localStorage.getItem("token")});
       })
 
       socket.on("connect_error", (err) => {
@@ -76,8 +72,6 @@ const webSocketMiddleware: Middleware = store => {
     if (webSocketActions.emit.match(action) && isConnectionEstablished) {
       socket.emit(action.payload.type, action.payload.content);
     }
-
-
 
     next(action);
   }

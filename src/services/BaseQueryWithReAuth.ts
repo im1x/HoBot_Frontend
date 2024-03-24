@@ -24,7 +24,6 @@ export const BaseQueryWithReAuth: BaseQueryFn<
     const refreshResult = (await baseQuery('/refresh', api, extraOptions)) as { data: AuthResponse };
     if (refreshResult.data) {
       // store the new token
-      //api.dispatch(tokenReceived(refreshResult.data))
       store.dispatch(setAuth(refreshResult.data))
       // retry the initial query
       result = await baseQuery(args, api, extraOptions)

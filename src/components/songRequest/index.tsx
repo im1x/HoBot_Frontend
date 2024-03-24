@@ -22,7 +22,6 @@ const SongRequest = () => {
     }
   }, [playlist]);
 
-
   const endSkipVideoHandler = () => {
     store.dispatch(songRequestActions.skipVideo());
     skipSong();

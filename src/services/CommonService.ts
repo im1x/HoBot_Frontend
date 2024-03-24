@@ -1,7 +1,6 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
 import {BaseQueryWithReAuth} from "./BaseQueryWithReAuth.ts";
 
-// Define a service using a base URL and expected endpoints
 export const commonApi = createApi({
   reducerPath: "commonApi",
   baseQuery: BaseQueryWithReAuth,

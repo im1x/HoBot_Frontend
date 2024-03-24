@@ -42,7 +42,6 @@ function App() {
               <Route path="/" element={userStore.isAuth ? <Main/> : <Login/>}>
                 <Route path="/modal/:id" element={<ModalLayout/>}/>
               </Route>
-              <Route path="/login" element={<Login/>}/>
               <Route path="/:id" element={<PublicPlaylist/>}/>
               {/* Add more routes as needed */}
             </Routes>
