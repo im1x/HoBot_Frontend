@@ -11,6 +11,7 @@ import vkplLogo from "../assets/vkpl.png";
 import StatusNotStreamer from "../components/StatusNotStreamer.tsx";
 const Login = () => {
   const [queryParameters] = useSearchParams();
+  const redirect_uri = "https://auth.vkplay.live/app/oauth2/authorize?client_id=c99moea4ax1945tr&redirect_uri=" + import.meta.env.VITE_API_URL + "vkpl&response_type=code";
   return (
     <Center h="100vh">
       <Box>
@@ -25,7 +26,7 @@ const Login = () => {
           Это бот дл VK Play Live. Он позволяет зрителям заказывать видео с YouTube, а стримерам создавать свои команды.
         </Text>
         <Center>
-          <Link to="https://auth.vkplay.live/app/oauth2/authorize?client_id=c99moea4ax1945tr&redirect_uri=http://localhost:5173/api/vkpl&response_type=code">
+          <Link to={redirect_uri}>
             <Button size="lg" color="#0077ff">
               <Image
                 mr="md"
