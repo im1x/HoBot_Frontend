@@ -36,7 +36,7 @@ function App() {
   return (
     <>
       {(isReadyForLoading || userStore.isAuth) && (
-        <main className="container content">
+        <main>
           <Suspense fallback={<></>}>
             <Routes location={background || location}>
               <Route path="/" element={userStore.isAuth ? <Main/> : <Login/>}>
