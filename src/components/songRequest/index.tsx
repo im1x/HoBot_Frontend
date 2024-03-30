@@ -39,7 +39,7 @@ const SongRequest = () => {
           <Player videoId={sr.currentVideo} volume={sr.volume} playing={sr.isPlaying} endVideo={endSkipVideoHandler}/>
           <Controls songRequest={sr} skipVideo={endSkipVideoHandler} clearPlaylist={clearPlaylistHandler}/>
         </Box>
-        <Box w={"calc(100% - 440px)"} maw={isNarrowWindow ? 440 : undefined} mx="sm" mt="sm"> {/*440 - player width*/}
+        <Box w={"calc(100% - 476px)"} maw={isNarrowWindow ? 440 : undefined} mx="sm" mt="sm"> {/*440 - player width + 36 margin*/}
           <Playlist playlist={sr.playlist}/>
         </Box>
       </Box>
