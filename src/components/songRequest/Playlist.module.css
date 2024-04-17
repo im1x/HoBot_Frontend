@@ -1,0 +1,17 @@
+.hide {
+    opacity: 0;
+    display: none;
+    position: relative;
+
+    transition-duration: 200ms;
+    transition-behavior: allow-discrete;
+}
+
+.playlistElement:hover > .hide {
+    opacity: 1;
+    display: block;
+
+    @starting-style {
+        opacity: 0;
+    }
+}

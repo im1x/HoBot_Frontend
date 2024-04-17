@@ -5,12 +5,14 @@ import {SongRequestVideo} from "../models/SongRequest.ts";
 export const songRequestApi = createApi({
   reducerPath: "songRequestApi",
   baseQuery: BaseQueryWithReAuth,
+  tagTypes: ["playlist"],
   endpoints: (builder) => ({
 
     getPlaylist: builder.query<SongRequestVideo[], void>({
       query: () => ({
         url: "songrequest/playlist",
       }),
+      providesTags: ["playlist"],
     }),
 
     skipSong: builder.mutation<null, void>({
@@ -25,6 +27,14 @@ export const songRequestApi = createApi({
         url: "songrequest/playlist",
         method: "DELETE"
       }),
+    }),
+
+    removeSong: builder.mutation<null, string>({
+      query: (id) => ({
+        url: "songrequest/playlist/" + id,
+        method: "DELETE"
+      }),
+      invalidatesTags: ['playlist'],
     }),
 
     getPublicPlaylist: builder.query<SongRequestVideo[], string>({

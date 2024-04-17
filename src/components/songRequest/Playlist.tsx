@@ -1,12 +1,19 @@
 import React, {useCallback} from "react";
 import {SongRequestVideo} from "../../models/SongRequest.ts";
-import {Anchor, Box, Divider, Paper, Text, ThemeIcon, Tooltip} from "@mantine/core";
-import {IconClockHour4, IconEye} from "@tabler/icons-react";
+import styles from "./Playlist.module.css";
+import {ActionIcon, Anchor, Box, Divider, Flex, Paper, Text, ThemeIcon, Tooltip} from "@mantine/core";
+import {
+  IconClockHour4,
+  IconEye,
+  IconTrash,
+} from "@tabler/icons-react";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
+import {songRequestApi} from "../../services/SongRequestService.ts";
 
 dayjs.extend(duration)
 const Playlist: React.FC<{ playlist: SongRequestVideo[] }> = ({ playlist }) => {
+  const [ removeSong ] = songRequestApi.useRemoveSongMutation();
 
     const totalDuration = useCallback(() => {
       const totalSeconds = playlist.reduce((a, b) => a + b.length, 0);
@@ -38,6 +45,7 @@ const Playlist: React.FC<{ playlist: SongRequestVideo[] }> = ({ playlist }) => {
             radius="md"
             withBorder p="5px"
             display="flex"
+            className={styles.playlistElement}
             key={index}
             bg={index === 0 ? "var(--mantine-color-blue-filled)" : undefined}>
               <Anchor href={`https://youtube.com/watch?v=${video.yt_id}`} target="_blank" ml="xs" c="var(--mantine-color-text)" truncate="end" w={"100%"}>
@@ -52,6 +60,13 @@ const Playlist: React.FC<{ playlist: SongRequestVideo[] }> = ({ playlist }) => {
                 <IconEye style={{ width: '90%', height: '90%' }} stroke={1.5} />
               </ThemeIcon>
               { video.views.toLocaleString("ru-RU") })
+            { index !== 0 &&
+              <Flex className={styles.hide}>
+                <ActionIcon pos={"absolute"} top={-4} right={-3} c={"red"} variant="default" size="lg" aria-label="Remove song" onClick={() => {removeSong(video.id)}}>
+                  <IconTrash style={{ width: '100%', height: '100%' }} stroke={1.5} />
+                </ActionIcon>
+              </Flex>
+            }
           </Paper>
         </Tooltip>
       ))}
