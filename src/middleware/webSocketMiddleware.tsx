@@ -26,7 +26,9 @@ const webSocketMiddleware: Middleware = store => {
           withCredentials: true,
           auth: {
             token: localStorage.getItem("token")
-          }
+          },
+          reconnection: true,
+          reconnectionDelay: 3000,
         });
       }
 

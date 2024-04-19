@@ -8,12 +8,15 @@ import {songRequestApi} from "../../services/SongRequestService.ts";
 import { useEffect } from "react";
 import {Box, em} from "@mantine/core";
 import {useMediaQuery} from "@mantine/hooks";
+import {settingsApi} from "../../services/SettingsService.ts";
 
 const SongRequest = () => {
   const sr = useSelector(selectSongRequest);
   const {data: playlist} = songRequestApi.useGetPlaylistQuery();
+  const {data: volume} = settingsApi.useGetVolumeQuery();
   const [skipSong] = songRequestApi.useSkipSongMutation();
   const [clearPlaylist] = songRequestApi.useClearPlaylistMutation();
+  const [saveVolume] = settingsApi.useSaveVolumeMutation();
   const isNarrowWindow = useMediaQuery(`(max-width: ${em(1108)})`);
 
   useEffect(() => {
@@ -21,6 +24,12 @@ const SongRequest = () => {
       store.dispatch(songRequestActions.setPlaylist(playlist));
     }
   }, [playlist]);
+
+  useEffect(() => {
+    if (volume) {
+      store.dispatch(songRequestActions.setVolume(volume));
+    }
+  }, [volume]);
 
   const endSkipVideoHandler = () => {
     store.dispatch(songRequestActions.skipVideo());
@@ -37,7 +46,7 @@ const SongRequest = () => {
       <Box display={isNarrowWindow ? "block" : "flex"}>
         <Box w={440} h={408} ml="sm" mt="sm">
           <Player videoId={sr.currentVideo} volume={sr.volume} playing={sr.isPlaying} endVideo={endSkipVideoHandler}/>
-          <Controls songRequest={sr} skipVideo={endSkipVideoHandler} clearPlaylist={clearPlaylistHandler}/>
+          <Controls songRequest={sr} skipVideo={endSkipVideoHandler} clearPlaylist={clearPlaylistHandler} saveVolume={saveVolume}/>
         </Box>
         <Box w={"calc(100% - 476px)"} maw={isNarrowWindow ? 440 : undefined} mx="sm" mt="sm"> {/*440 - player width + 36 margin*/}
           <Playlist playlist={sr.playlist}/>

@@ -47,5 +47,18 @@ export const settingsApi = createApi({
       invalidatesTags: ["commands"],
     }),
 
+    saveVolume: builder.mutation<null, number>({
+      query: (volume) => ({
+        url: `/settings/volume/${volume}`,
+        method: "POST",
+      }),
+    }),
+
+    getVolume: builder.query<number, void>({
+      query: () => ({
+        url: "settings/volume",
+      }),
+    }),
+
   }),
 });

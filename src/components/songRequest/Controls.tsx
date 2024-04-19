@@ -13,14 +13,18 @@ import {store} from "../../store/store.ts";
 import {SongRequestState} from "../../models/SongRequest.ts";
 import {modals} from "@mantine/modals";
 
-const Controls: React.FC<{ songRequest: SongRequestState, skipVideo: () => void, clearPlaylist: () => void}> = ({ songRequest, skipVideo, clearPlaylist }) => {
+const Controls: React.FC<{
+  songRequest: SongRequestState,
+  skipVideo: () => void,
+  clearPlaylist: () => void,
+  saveVolume: (volume: number) => void}> = ({ songRequest, skipVideo, clearPlaylist, saveVolume }) => {
   const openModalClearPlaylist = () => modals.openConfirmModal({
     title: 'Очистить плейлист?',
     centered: true,
     labels: { confirm: 'Да', cancel: 'Отмена' },
     onConfirm: () => clearPlaylist(),
   });
-  
+
   return (
     <Paper bg="rgba(0, 0, 0, .3)" withBorder py="sm">
       <Flex
@@ -67,6 +71,7 @@ const Controls: React.FC<{ songRequest: SongRequestState, skipVideo: () => void,
           size="lg"
           value={songRequest.volume}
           onChange={ (volume) => store.dispatch(songRequestActions.setVolume(volume))}
+          onChangeEnd={ (volume) => saveVolume(volume)}
         />
       </Center>
 
