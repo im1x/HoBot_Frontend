@@ -3,6 +3,8 @@ import {io, Socket} from 'socket.io-client';
 import { webSocketActions, WsMessage } from '../store/reducers/WebSocketSlice.ts';
 import {songRequestActions} from "../store/reducers/SongRequestSlice.ts";
 import {SongRequestVideo} from "../models/SongRequest.ts";
+import {authApi} from "../services/AuthService.ts";
+import {AppDispatch} from "../store/store.ts";
 
 export enum WsEvent {
   SendMessage = 'send_message',
@@ -17,28 +19,49 @@ export enum WsEvent {
 const webSocketMiddleware: Middleware = store => {
   let socket: Socket;
 
+  const reconnect = () => {
+    console.log("--- WS connecting ---");
+    socket = io(import.meta.env.VITE_WS_URL, {
+      withCredentials: true,
+      auth: {
+        token: localStorage.getItem("token")
+      },
+      reconnection: true,
+      reconnectionDelay: 3000,
+    });
+  }
+
   return next => action => {
     const isConnectionEstablished = socket;
 
     if (webSocketActions.startConnecting.match(action)) {
       if (!socket) {
-        socket = io(import.meta.env.VITE_WS_URL, {
-          withCredentials: true,
-          auth: {
-            token: localStorage.getItem("token")
-          },
-          reconnection: true,
-          reconnectionDelay: 3000,
-        });
+        reconnect();
       }
 
       socket.on('connect', () => {
         store.dispatch(webSocketActions.connectionEstablished());
+        console.log("--- Connected to WebSocket ---");
       })
 
       socket.on("connect_error", (err) => {
-        console.log(err);
+        console.log("--- connect error ---");
+        console.log(err.message);
+        if (err.message === "Unauthorized: invalid token") {
+          triggerApi(store.dispatch)
+            .then((success) => {
+              if (success) {
+                reconnect();
+              } else {
+                console.error('Failed to refresh token');
+              }
+            });
+        }
       });
+
+      socket.on("disconnect", (reason) => {
+        console.log(`--- Disconnected from WebSocket ---: ${reason}`);
+      })
 
       socket.on(WsEvent.SendAllMessages, (messages: WsMessage[]) => {
         store.dispatch(webSocketActions.receiveAllMessages({ messages }));
@@ -79,4 +102,14 @@ const webSocketMiddleware: Middleware = store => {
   }
 }
 
+
+const triggerApi = async (dispatch: AppDispatch): Promise<boolean> => {
+  try {
+    const promise = dispatch(authApi.endpoints.currentUser.initiate(undefined, { forceRefetch: true }));
+    await promise;
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
 export default webSocketMiddleware;
