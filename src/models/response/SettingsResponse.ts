@@ -14,3 +14,8 @@ export interface SettingsCommand {
   access_level: number | string | null;
   payload?: string;
 }
+
+export interface SettingsSongRequest {
+  min_video_views: number;
+  max_requests_per_user: number;
+}

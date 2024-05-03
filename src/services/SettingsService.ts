@@ -1,11 +1,11 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
 import {BaseQueryWithReAuth} from "./BaseQueryWithReAuth.ts";
-import {SettingsCommand, SettingsCommandsList} from "../models/response/SettingsResponse.ts";
+import {SettingsCommand, SettingsCommandsList, SettingsSongRequest} from "../models/response/SettingsResponse.ts";
 
 export const settingsApi = createApi({
   reducerPath: "settingsApi",
   baseQuery: BaseQueryWithReAuth,
-  tagTypes: ["commands"],
+  tagTypes: ["commands", "songRequest"],
   endpoints: (builder) => ({
 
     getCommands: builder.query<SettingsCommand[], void>({
@@ -23,7 +23,7 @@ export const settingsApi = createApi({
 
     addCommand: builder.mutation<SettingsCommand[], SettingsCommand>({
       query: (cmd) => ({
-        url: "/settings/commands",
+        url: "settings/commands",
         method: "POST",
         body: cmd,
       }),
@@ -32,7 +32,7 @@ export const settingsApi = createApi({
 
     editCommand: builder.mutation<SettingsCommand[], {alias: string, cmd: SettingsCommand}>({
       query: ({alias, cmd}) => ({
-        url: `/settings/commands/${alias}`,
+        url: `settings/commands/${alias}`,
         method: "PUT",
         body: cmd,
       }),
@@ -41,7 +41,7 @@ export const settingsApi = createApi({
 
     deleteCommand: builder.mutation<SettingsCommand[], string>({
       query: (alias) => ({
-        url: `/settings/commands/${alias}`,
+        url: `settings/commands/${alias}`,
         method: "DELETE",
       }),
       invalidatesTags: ["commands"],
@@ -49,7 +49,7 @@ export const settingsApi = createApi({
 
     saveVolume: builder.mutation<null, number>({
       query: (volume) => ({
-        url: `/settings/volume/${volume}`,
+        url: `settings/volume/${volume}`,
         method: "POST",
       }),
     }),
@@ -58,6 +58,22 @@ export const settingsApi = createApi({
       query: () => ({
         url: "settings/volume",
       }),
+    }),
+
+    saveSongRequestsSettings: builder.mutation<null, SettingsSongRequest>({
+      query: (settings) => ({
+        url: `settings/songrequests`,
+        method: "POST",
+        body: settings,
+      }),
+      invalidatesTags: ["songRequest"],
+    }),
+
+    getSongRequestsSettings: builder.query<SettingsSongRequest, void>({
+      query: () => ({
+        url: "settings/songrequests",
+      }),
+      providesTags: ["songRequest"],
     }),
 
   }),

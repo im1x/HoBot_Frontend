@@ -12,6 +12,7 @@ const mockdata = [
     initiallyOpened: true,
     links: [
       { label: "Комманды", link: "/modal/commandsSettings", modal: true },
+      { label: "Заказ песен", link: "/modal/songRequestsSettings", modal: true },
     ],
   },
   {
