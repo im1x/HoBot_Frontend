@@ -53,8 +53,8 @@ export const CommandsSettings = () => {
 
   const handleSubmitAdd = async () => {
     const updatedValues = {
-      ...formAdd.values,
-      access_level: parseInt(formAdd.values.access_level?.toString() || "0"),
+      ...formAdd.getValues(),
+      access_level: parseInt(formAdd.getValues().access_level?.toString() || "0"),
     };
     addCommand(updatedValues).then((result) => {
       if ("data" in result) {
@@ -116,20 +116,20 @@ export const CommandsSettings = () => {
     const updatedCommands = [...commands];
 
     if (
-      formEdit.values.alias === updatedCommands[index].alias &&
-      formEdit.values.access_level?.toString() ===
+      formEdit.getValues().alias === updatedCommands[index].alias &&
+      formEdit.getValues().access_level?.toString() ===
         updatedCommands[index].access_level?.toString() &&
-      formEdit.values.payload === updatedCommands[index].payload
+      formEdit.getValues().payload === updatedCommands[index].payload
     ) {
       setEditAlias("");
       return;
     }
 
-    updatedCommands[index] = formEdit.values;
+    updatedCommands[index] = formEdit.getValues();
     updatedCommands[index].access_level = parseInt(
       updatedCommands[index].access_level?.toString() || "0",
     );
-    updatedCommands[index].payload = formEdit.values.payload || "";
+    updatedCommands[index].payload = formEdit.getValues().payload || "";
 
     editCommand({ alias: editAlias, cmd: updatedCommands[index] }).then(
       (result) => {
@@ -154,11 +154,11 @@ export const CommandsSettings = () => {
   };
 
   const isCommonCommandExists = () => {
-    return commands.some((command) => command.payload === "");
+    return commands?.some((command) => command.payload === "") ?? false;
   };
 
   const isTextCommandExists = () => {
-    return commands.some((command) => command.payload !== "");
+    return commands?.some((command) => command.payload !== "") ?? false;
   };
 
   const headers1 = [
@@ -244,7 +244,7 @@ export const CommandsSettings = () => {
               placeholder="Введите новую команду"
               {...formAdd.getInputProps("alias")}
             />
-            {formAdd.values.command === "Print_Text" ? (
+            {formAdd.getValues().command === "Print_Text" ? (
               <Textarea
                 placeholder="Текст"
                 {...formAdd.getInputProps("payload")}
