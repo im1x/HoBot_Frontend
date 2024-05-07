@@ -54,7 +54,7 @@ const Controls: React.FC<{
           }
         />
 
-        <ActionIcon variant="transparent" size="lg" aria-label="Skip" onClick={skipVideo}>
+        <ActionIcon variant="transparent" size="lg" aria-label="Skip" onClick={() => skipVideo()}>
           <IconPlayerSkipForward style={{ width: '100%', height: '100%' }} stroke={1.5} />
         </ActionIcon>
 

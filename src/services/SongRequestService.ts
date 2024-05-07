@@ -15,10 +15,11 @@ export const songRequestApi = createApi({
       providesTags: ["playlist"],
     }),
 
-    skipSong: builder.mutation<null, void>({
-      query: () => ({
+    skipSong: builder.mutation<null, boolean>({
+      query: (isAutoSkip) => ({
         url: "songrequest/skip",
-        method: "POST"
+        method: "POST",
+        body: isAutoSkip? {autoSkip: true} : {}
       }),
     }),
 

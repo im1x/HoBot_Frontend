@@ -31,9 +31,9 @@ const SongRequest = () => {
     }
   }, [volume]);
 
-  const endSkipVideoHandler = () => {
+  const endSkipVideoHandler = (isAutoSkip?: boolean) => {
     store.dispatch(songRequestActions.skipVideo());
-    skipSong();
+    isAutoSkip? skipSong(true) : skipSong(false);
   }
 
   const clearPlaylistHandler = () => {

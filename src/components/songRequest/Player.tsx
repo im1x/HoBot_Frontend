@@ -7,7 +7,7 @@ const SongRequestPlayer: React.FC<{
   videoId: string,
   volume: number,
   playing: boolean,
-  endVideo: () => void
+  endVideo: (isAutoSkip?: boolean) => void
 }> =({videoId, volume, playing, endVideo}) => {
   return (
     <ReactPlayer
@@ -16,7 +16,8 @@ const SongRequestPlayer: React.FC<{
       url={"https://www.youtube.com/watch?v=" + videoId}
       playing={playing}
       volume={volume / 100}
-      onEnded={endVideo}
+      onEnded={() => endVideo()}
+      onError={() => endVideo(true)}
       onProgress={(event) => store.dispatch(setProgress(event.played))}
       style={{ pointerEvents: "none" }}
     />
