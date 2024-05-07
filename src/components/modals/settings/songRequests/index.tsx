@@ -54,6 +54,14 @@ const SongRequestsSettings = () => {
         />
         <NumberInput
           mt="sm"
+          label="Максимальная продолжительность видео в минутах (0 - без лимита)"
+          min={0}
+          max={60}
+          key={formSettings.key('max_duration_minutes')}
+          {...formSettings.getInputProps('max_duration_minutes')}
+        />
+        <NumberInput
+          mt="sm"
           label="Допустимое количество заказов от одного пользователя на плейлист (0 - без лимита)"
           min={0}
           max={30}

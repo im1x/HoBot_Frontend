@@ -18,4 +18,5 @@ export interface SettingsCommand {
 export interface SettingsSongRequest {
   min_video_views: number;
   max_requests_per_user: number;
+  max_duration_minutes: number;
 }
