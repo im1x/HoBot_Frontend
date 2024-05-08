@@ -9,6 +9,12 @@ const SongRequestPlayer: React.FC<{
   playing: boolean,
   endVideo: (isAutoSkip?: boolean) => void
 }> =({videoId, volume, playing, endVideo}) => {
+  const handleOnError = () => {
+    setTimeout(() => {
+      endVideo(true);
+    }, 1000);
+  };
+
   return (
     <ReactPlayer
       width="440px"
@@ -17,7 +23,7 @@ const SongRequestPlayer: React.FC<{
       playing={playing}
       volume={volume / 100}
       onEnded={() => endVideo()}
-      onError={() => endVideo(true)}
+      onError={handleOnError}
       onProgress={(event) => store.dispatch(setProgress(event.played))}
       style={{ pointerEvents: "none" }}
     />
