@@ -13,7 +13,8 @@ export enum WsEvent {
   SongRequestAdded = 'SongRequestAdded',
   SongRequestSetVolume = 'SongRequestSetVolume',
   SongRequestSkipSong = 'SongRequestSkipSong',
-  SongRequestPlayPause = 'SongRequestPlayPause'
+  SongRequestPlayPause = 'SongRequestPlayPause',
+  SongRequestDeleteSong = 'SongRequestDeleteSong'
 }
 
 const webSocketMiddleware: Middleware = store => {
@@ -82,6 +83,10 @@ const webSocketMiddleware: Middleware = store => {
 
       socket.on(WsEvent.SongRequestSkipSong, () => {
         store.dispatch(songRequestActions.skipVideo());
+      })
+
+      socket.on(WsEvent.SongRequestDeleteSong, (id: string) => {
+        store.dispatch(songRequestActions.deleteVideo(id));
       })
 
       socket.on(WsEvent.SongRequestPlayPause, () => {

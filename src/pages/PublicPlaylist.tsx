@@ -5,6 +5,8 @@ import {Anchor, Box, Table} from "@mantine/core";
 import {SongRequestVideo} from "../models/SongRequest.ts";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
+import {notifications} from "@mantine/notifications";
+import {IconCheck} from "@tabler/icons-react";
 
 const PublicPlaylist = () => {
   dayjs.extend(duration)
@@ -22,10 +24,26 @@ const PublicPlaylist = () => {
 
   let currentDuration =- (playlist?.[0]?.length ?? 0);
 
+  const copyToClipboard = (event: any, id: string) => {
+    if (event.ctrlKey) {
+      try {
+        navigator.clipboard.writeText("!уд " + id).then(() => {
+          notifications.show({
+            message: "Скопировано",
+            color: "green",
+            icon: <IconCheck />,
+          });
+        });
+      } catch (error) {
+        console.error('Failed to copy: ', error);
+      }
+    }
+  }
+
   const rows = playlist?.map((video: SongRequestVideo) => {
     currentDuration += video.length;
     return (
-      <Table.Tr key={video.requested + video.yt_id}>
+      <Table.Tr key={video.requested + video.yt_id} onClick={ event => copyToClipboard(event, video.yt_id)}>
         <Table.Td>
           <Anchor href={`https://youtube.com/watch?v=${video.yt_id}`} target="_blank" c="var(--mantine-color-text)">
             {video.title}

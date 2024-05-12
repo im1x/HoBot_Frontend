@@ -38,6 +38,10 @@ const songRequestSlice = createSlice({
 
     },
 
+    deleteVideo: (state, action: PayloadAction<string>) => {
+      state.playlist = state.playlist.filter((video) => video.id !== action.payload);
+    },
+
     setVolume: (state, action: PayloadAction<number>) => {
       state.volume = action.payload;
     },
