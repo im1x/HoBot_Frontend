@@ -12,12 +12,14 @@ const PublicPlaylist = () => {
   dayjs.extend(duration)
   const { id = '' } = useParams();
   const [getPublicPlaylist] = songRequestApi.useLazyGetPublicPlaylistQuery();
+  const [history, setHistory] = useState<SongRequestVideo[]>();
   const [playlist, setPlaylist] = useState<SongRequestVideo[]>();
 
   useEffect(() => {
     if (id) {
       getPublicPlaylist(id).then((pl) => {
-          setPlaylist(pl.data);
+          setHistory(pl.data?.history);
+          setPlaylist(pl.data?.playlist);
       });
     }
   }, [id]);
@@ -25,7 +27,7 @@ const PublicPlaylist = () => {
   let currentDuration =- (playlist?.[0]?.length ?? 0);
 
   const copyToClipboard = (event: any, id: string) => {
-    if (event.ctrlKey) {
+    if (event.ctrlKey && id !== playlist?.[0]?.yt_id) {
       try {
         navigator.clipboard.writeText("!уд " + id).then(() => {
           notifications.show({
@@ -40,10 +42,28 @@ const PublicPlaylist = () => {
     }
   }
 
-  const rows = playlist?.map((video: SongRequestVideo) => {
+  const rowsHistory = history?.map((video: SongRequestVideo) => {
+    return (
+      <Table.Tr key={video.requested + video.yt_id} opacity="0.5">
+        <Table.Td>
+          <Anchor href={`https://youtube.com/watch?v=${video.yt_id}`} target="_blank" c="var(--mantine-color-text)">
+            {video.title}
+          </Anchor>
+        </Table.Td>
+        <Table.Td>{dayjs.duration(video.length * 1000).format("mm:ss")}</Table.Td>
+        <Table.Td>{video.views.toLocaleString("ru-RU")}</Table.Td>
+        <Table.Td>{video.by}</Table.Td>
+        <Table.Td>Уже была</Table.Td>
+      </Table.Tr>
+    );
+  });
+
+  const rowsPlaylist = playlist?.map((video: SongRequestVideo, index) => {
     currentDuration += video.length;
     return (
-      <Table.Tr key={video.requested + video.yt_id} onClick={ event => copyToClipboard(event, video.yt_id)}>
+      <Table.Tr key={video.requested + video.yt_id}
+                onClick={ event => copyToClipboard(event, video.yt_id)}
+                bg={index === 0 ? "var(--mantine-color-blue-filled)" : undefined}>
         <Table.Td>
           <Anchor href={`https://youtube.com/watch?v=${video.yt_id}`} target="_blank" c="var(--mantine-color-text)">
             {video.title}
@@ -69,7 +89,7 @@ const PublicPlaylist = () => {
             <Table.Th w={"15%"}>Время до песни ~</Table.Th>
           </Table.Tr>
         </Table.Thead>
-        <Table.Tbody>{rows}</Table.Tbody>
+        <Table.Tbody>{rowsHistory}{rowsPlaylist}</Table.Tbody>
       </Table>
     </Box>
   )

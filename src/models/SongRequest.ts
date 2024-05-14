@@ -19,3 +19,8 @@ export interface SongRequestState {
   progress: number;
   status: string;
 }
+
+export interface PlaylistAndHistory {
+  playlist: SongRequestVideo[];
+  history: SongRequestVideo[];
+}

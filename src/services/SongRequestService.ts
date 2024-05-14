@@ -1,6 +1,6 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
 import {BaseQueryWithReAuth} from "./BaseQueryWithReAuth.ts";
-import {SongRequestVideo} from "../models/SongRequest.ts";
+import {PlaylistAndHistory, SongRequestVideo} from "../models/SongRequest.ts";
 
 export const songRequestApi = createApi({
   reducerPath: "songRequestApi",
@@ -38,7 +38,7 @@ export const songRequestApi = createApi({
       invalidatesTags: ['playlist'],
     }),
 
-    getPublicPlaylist: builder.query<SongRequestVideo[], string>({
+    getPublicPlaylist: builder.query<PlaylistAndHistory, string>({
       query: (name) => ({
         url: "songrequest/playlist/" + name,
       }),
