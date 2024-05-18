@@ -11,6 +11,7 @@ import {
 } from "./store/reducers/UserSlice.ts";
 import { webSocketActions } from "./store/reducers/WebSocketSlice.ts";
 import ModalLayout from "./components/ModalLayout.tsx";
+import Help from "./pages/Help.tsx";
 const Login = lazy(() => import('./pages/Login'));
 const Main = lazy(() => import('./pages/Main'));
 const PublicPlaylist = lazy(() => import('./pages/PublicPlaylist'));
@@ -43,6 +44,7 @@ function App() {
                 <Route path="/modal/:id" element={<ModalLayout/>}/>
               </Route>
               <Route path="/:id" element={<PublicPlaylist/>}/>
+              <Route path="/p/help" element={<Help/>}/>
               {/* Add more routes as needed */}
             </Routes>
             {background && (

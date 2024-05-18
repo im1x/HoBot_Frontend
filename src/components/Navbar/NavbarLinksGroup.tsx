@@ -33,6 +33,7 @@ export function LinksGroup({
       className={classes.link}
       key={link.label}
       state={link.modal ? { background: location } : undefined}
+      target={ link.modal ? undefined : "_blank"}
     >
       {link.label}
     </Link>

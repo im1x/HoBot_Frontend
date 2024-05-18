@@ -25,7 +25,7 @@ const EditableRow: React.FC<{
           <ActionIcon type="submit" variant="filled" aria-label="Edit">
             <IconCheck style={{ width: '70%', height: '70%' }} stroke={1.5} />
           </ActionIcon>
-          <ActionIcon variant="filled" aria-label="Delete" ml="5px" onClick={handleCancel}>
+          <ActionIcon variant="filled" aria-label="Cancel" ml="5px" onClick={handleCancel}>
             <IconPencilOff style={{ width: '70%', height: '70%' }} stroke={1.5} />
           </ActionIcon>
         </Table.Td>
