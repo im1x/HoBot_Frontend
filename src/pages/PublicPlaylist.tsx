@@ -24,7 +24,7 @@ const PublicPlaylist = () => {
     }
   }, [id]);
 
-  let currentDuration =- (playlist?.[0]?.length ?? 0);
+  let currentDuration = 0;
 
   const copyToClipboard = (event: any, id: string) => {
     if (event.ctrlKey && id !== playlist?.[0]?.yt_id) {
@@ -59,7 +59,9 @@ const PublicPlaylist = () => {
   });
 
   const rowsPlaylist = playlist?.map((video: SongRequestVideo, index) => {
-    currentDuration += video.length;
+    if (index !== 0) {
+      currentDuration += playlist[index-1]?.length;
+    }
     return (
       <Table.Tr key={video.requested + video.yt_id}
                 onClick={ event => copyToClipboard(event, video.yt_id)}
