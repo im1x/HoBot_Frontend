@@ -24,47 +24,47 @@ const StartVoting = () => {
   };
 
   return (
-    <>
-      <Box display="flex">
-        <TextInput flex="1" label="Заголовок" value={votingRequest.title} onChange={e => setVotingRequest({...votingRequest, title: e.target.value})}/>
-        <NumberInput ml="md" label="Длительность в минутах" min={1} max={60} value={votingRequest.duration} onChange={e => setVotingRequest({...votingRequest, duration: e as number})} />
+    <Center>
+      <Box w={780}>
+        <Box display="flex">
+          <TextInput flex="1" label="Заголовок" value={votingRequest.title} onChange={e => setVotingRequest({...votingRequest, title: e.target.value})}/>
+          <NumberInput ml="md" label="Длительность в минутах" min={1} max={60} value={votingRequest.duration} onChange={e => setVotingRequest({...votingRequest, duration: e as number})} />
+        </Box>
+
+        <Text mt="xl">Варианты:</Text>
+        {votingRequest.options.map((value, index) => {
+          return (
+            <TextInput
+              key={index}
+              mt="xs"
+              leftSection={index + 1}
+              rightSection={
+                <CloseButton
+                  onClick={() => {
+                    const newOptions = [...votingRequest.options];
+                    newOptions.splice(index, 1);
+                    setVotingRequest({...votingRequest, options: newOptions});
+                  }}
+                  style={{ display: votingRequest.options.length > 2 ? undefined : 'none' }}
+                />
+              }
+              value={value} onChange={e => {
+              const newOptions = [...votingRequest.options];
+              newOptions[index] = e.target.value;
+              setVotingRequest({...votingRequest, options: newOptions});
+            }} />
+          )
+        })}
+
+        <Button style={{ display: votingRequest.options.length < 10 ? undefined : 'none' }} leftSection={<IconPlus />} mt="md" onClick={ () => setVotingRequest({...votingRequest, options: [...votingRequest.options, ""]}) } >
+          Добавить
+        </Button>
+
+        <Center>
+          <Button size="lg" mt="md" disabled={!isReadyToStart} onClick={() => start()}>Начать</Button>
+        </Center>
       </Box>
-
-
-      <Text mt="xl">Варианты:</Text>
-      {votingRequest.options.map((value, index) => {
-        return (
-          <TextInput
-            key={index}
-            mt="xs"
-            leftSection={index + 1}
-            rightSection={
-              <CloseButton
-                onClick={() => {
-                  const newOptions = [...votingRequest.options];
-                  newOptions.splice(index, 1);
-                  setVotingRequest({...votingRequest, options: newOptions});
-                }}
-                style={{ display: votingRequest.options.length > 2 ? undefined : 'none' }}
-              />
-            }
-            value={value} onChange={e => {
-            const newOptions = [...votingRequest.options];
-            newOptions[index] = e.target.value;
-            setVotingRequest({...votingRequest, options: newOptions});
-          }} />
-        )
-      })}
-
-      <Button style={{ display: votingRequest.options.length < 10 ? undefined : 'none' }} leftSection={<IconPlus />} mt="md" onClick={ () => setVotingRequest({...votingRequest, options: [...votingRequest.options, ""]}) } >
-        Добавить
-      </Button>
-
-      <Center>
-        <Button size="lg" mt="md" disabled={!isReadyToStart} onClick={() => start()}>Начать</Button>
-      </Center>
-
-    </>
+    </Center>
     )
 };
 

@@ -3,8 +3,7 @@ import Theme from "./Theme.ts";
 import {ResponsivePie} from "@nivo/pie";
 import {VotingResult} from "../../models/Voting.ts";
 
-const Bar: React.FC<{data: VotingResult[]}> =  ({ data }) => {
-  const colors = ['#FF6347', '#32CD32', '#4682B4', '#FF69B4', '#8B4513', '#9932CC', '#2E8B57', '#FFC300', '#8B0000', '#20B2AA'];
+const Bar: React.FC<{data: VotingResult[], colors: string[]}> =  ({ data, colors }) => {
   return (
     <ResponsivePie
       data={data}

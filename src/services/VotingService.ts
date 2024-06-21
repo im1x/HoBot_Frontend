@@ -23,10 +23,9 @@ export const votingApi = createApi({
       }),
     }),
 
-    getVotingState: builder.mutation<VotingState, null>({
+    getVotingState: builder.query<VotingState, void>({
       query: () => ({
         url: "voting",
-        method: "GET",
       }),
     }),
 
