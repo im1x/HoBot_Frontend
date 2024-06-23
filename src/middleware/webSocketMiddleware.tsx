@@ -5,6 +5,8 @@ import {songRequestActions} from "../store/reducers/SongRequestSlice.ts";
 import {SongRequestVideo} from "../models/SongRequest.ts";
 import {authApi} from "../services/AuthService.ts";
 import {AppDispatch} from "../store/store.ts";
+import {Vote, VotingState} from "../models/Voting.ts";
+import {votingActions} from "../store/reducers/VotingSlice.ts";
 
 export enum WsEvent {
   SendMessage = 'send_message',
@@ -14,7 +16,12 @@ export enum WsEvent {
   SongRequestSetVolume = 'SongRequestSetVolume',
   SongRequestSkipSong = 'SongRequestSkipSong',
   SongRequestPlayPause = 'SongRequestPlayPause',
-  SongRequestDeleteSong = 'SongRequestDeleteSong'
+  SongRequestDeleteSong = 'SongRequestDeleteSong',
+  VotingStart = 'VotingStart',
+  VotingVote = 'VotingVote',
+  VotingStop = 'VotingStop',
+  VotingDelete = 'VotingDelete',
+  RatingVote = 'RatingVote',
 }
 
 const webSocketMiddleware: Middleware = store => {
@@ -91,6 +98,23 @@ const webSocketMiddleware: Middleware = store => {
 
       socket.on(WsEvent.SongRequestPlayPause, () => {
         store.dispatch(songRequestActions.togglePlay());
+      })
+
+      // voting
+      socket.on(WsEvent.VotingStart, (payload: VotingState) => {
+        store.dispatch(votingActions.setVoting(payload))
+      })
+
+      socket.on(WsEvent.VotingVote, (payload: Vote) => {
+        store.dispatch(votingActions.vote(payload))
+      })
+
+      socket.on(WsEvent.VotingStop, (payload: VotingState) => {
+        store.dispatch(votingActions.setVoting(payload))
+      })
+
+      socket.on(WsEvent.VotingDelete, () => {
+        store.dispatch(votingActions.deleteVoting())
       })
 
     }

@@ -1,11 +1,11 @@
 import { ScrollArea } from "@mantine/core";
 import {
   IconAdjustments,
-  IconHelp,
+  IconHelp, IconPacman,
 } from "@tabler/icons-react";
 import { LinksGroup } from "./NavbarLinksGroup.tsx";
 
-const mockdata = [
+const menuData = [
   {
     label: "Настройки",
     icon: IconAdjustments,
@@ -13,6 +13,15 @@ const mockdata = [
     links: [
       { label: "Комманды", link: "/modal/commandsSettings", modal: true },
       { label: "Заказ песен", link: "/modal/songRequestsSettings", modal: true },
+    ],
+  },
+  {
+    label: "Действия",
+    icon: IconPacman,
+    initiallyOpened: true,
+    links: [
+      { label: "Голосование", link: "/modal/voting", modal: true },
+      { label: "Оценка", link: "/modal/rating", modal: true },
     ],
   },
   {
@@ -28,7 +37,7 @@ const mockdata = [
 ];
 
 export default function NavbarNested() {
-  const links = mockdata.map((item) => (
+  const links = menuData.map((item) => (
     <LinksGroup {...item} key={item.label} />
   ));
 

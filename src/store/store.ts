@@ -8,6 +8,8 @@ import {settingsApi} from "../services/SettingsService.ts";
 import songRequestSlice from "./reducers/SongRequestSlice.ts";
 import {songRequestApi} from "../services/SongRequestService.ts";
 import {commonApi} from "../services/CommonService.ts";
+import {votingApi} from "../services/VotingService.ts";
+import votingSlice from "./reducers/VotingSlice.ts";
 
 export const store = configureStore({
   reducer: {
@@ -19,11 +21,19 @@ export const store = configureStore({
     [songRequestSlice.reducerPath]: songRequestSlice.reducer,
     [songRequestApi.reducerPath]: songRequestApi.reducer,
     [commonApi.reducerPath]: commonApi.reducer,
+    [votingSlice.reducerPath]: votingSlice.reducer,
+    [votingApi.reducerPath]: votingApi.reducer
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, settingsApi.middleware, songRequestApi.middleware, commonApi.middleware, webSocketMiddleware),
+    getDefaultMiddleware().concat(
+      authApi.middleware,
+      settingsApi.middleware,
+      songRequestApi.middleware,
+      commonApi.middleware,
+      votingApi.middleware,
+      webSocketMiddleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
