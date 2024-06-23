@@ -2,14 +2,23 @@ import React, {useState} from "react";
 import {VotingRequest} from "../../../models/Voting.ts";
 import {votingApi} from "../../../services/VotingService.ts";
 import {Box, Button, Center, NumberInput, TextInput, Text} from "@mantine/core";
+import dayjs from "dayjs";
 
 const StartRating: React.FC = () => {
   const [votingRequest, setVotingRequest] = useState<VotingRequest>({
     type: 1,
     title: "",
     options: [],
-    duration: 3});
+    duration: 3,
+    stopAt: ""});
   const [startVoting] = votingApi.useStartVotingMutation();
+
+  const start = () => {
+    const now = dayjs()
+    votingRequest.stopAt = now.add(votingRequest.duration, "minute").add(1, "second").toISOString();
+
+    startVoting(votingRequest);
+  };
 
   return (
     <>
@@ -21,7 +30,7 @@ const StartRating: React.FC = () => {
           </Box>
       </Center>
       <Center>
-        <Button size="lg" mt="md" onClick={() => startVoting(votingRequest)}>Начать</Button>
+        <Button size="lg" mt="md" onClick={() => start()}>Начать</Button>
       </Center>
     </>
   )

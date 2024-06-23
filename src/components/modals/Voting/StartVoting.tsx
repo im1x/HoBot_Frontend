@@ -3,13 +3,15 @@ import {votingApi} from "../../../services/VotingService.ts";
 import {useMemo, useState} from "react";
 import {VotingRequest} from "../../../models/Voting.ts";
 import {IconPlus} from "@tabler/icons-react";
+import dayjs from "dayjs";
 
 const StartVoting = () => {
   const [votingRequest, setVotingRequest] = useState<VotingRequest>({
     type: 0,
     title: "",
     options: ["", ""],
-    duration: 3});
+    duration: 3,
+    stopAt: ""});
   const [startVoting] = votingApi.useStartVotingMutation();
 
   const isReadyToStart = useMemo(() => {
@@ -20,6 +22,10 @@ const StartVoting = () => {
   const start = () => {
     const filteredOptions = votingRequest.options.filter(option => option !== "");
     const updatedVotingRequest = { ...votingRequest, options: filteredOptions };
+
+    const now = dayjs()
+    updatedVotingRequest.stopAt = now.add(votingRequest.duration, "minute").add(1, "second").toISOString();
+
     startVoting(updatedVotingRequest);
   };
 

@@ -2,6 +2,7 @@ export interface VotingRequest {
   type: number;
   title: string;
   duration: number;
+  stopAt: string;
   options: string[];
 }
 

@@ -19,7 +19,10 @@ const Rating = () => {
 
   return (
     <>
-      { isReadyToShow && voting.isHaveResult && voting.type === 1 ? <ResultRating voting={voting}/> : <StartRating/>}
+      { isReadyToShow && (
+          isReadyToShow && voting.isHaveResult && voting.type === 1 ? <ResultRating voting={voting}/> : <StartRating/>
+        )
+      }
     </>
   )
 }

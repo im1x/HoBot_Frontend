@@ -20,7 +20,10 @@ const Voting = () => {
 
   return (
     <>
-      { isReadyToShow && voting.isHaveResult && voting.type === 0 ? <ResultVoting voting={voting}/> : <StartVoting/>}
+      { isReadyToShow && (
+          voting.isHaveResult && voting.type === 0 ? <ResultVoting voting={voting}/> : <StartVoting/>
+        )
+      }
     </>
   )
 }
