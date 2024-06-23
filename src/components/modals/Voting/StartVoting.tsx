@@ -27,8 +27,8 @@ const StartVoting = () => {
     <Center>
       <Box w={780}>
         <Box display="flex">
-          <TextInput flex="1" label="Заголовок" value={votingRequest.title} onChange={e => setVotingRequest({...votingRequest, title: e.target.value})}/>
-          <NumberInput ml="md" label="Длительность в минутах" min={1} max={60} value={votingRequest.duration} onChange={e => setVotingRequest({...votingRequest, duration: e as number})} />
+          <TextInput flex="1" label="Заголовок:" value={votingRequest.title} onChange={e => setVotingRequest({...votingRequest, title: e.target.value})}/>
+          <NumberInput ml="md" label="Длительность в минутах:" min={1} max={60} value={votingRequest.duration} onChange={e => setVotingRequest({...votingRequest, duration: e as number})} />
         </Box>
 
         <Text mt="xl">Варианты:</Text>

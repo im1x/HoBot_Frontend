@@ -21,6 +21,7 @@ export enum WsEvent {
   VotingVote = 'VotingVote',
   VotingStop = 'VotingStop',
   VotingDelete = 'VotingDelete',
+  RatingVote = 'RatingVote',
 }
 
 const webSocketMiddleware: Middleware = store => {
@@ -99,26 +100,20 @@ const webSocketMiddleware: Middleware = store => {
         store.dispatch(songRequestActions.togglePlay());
       })
 
+      // voting
       socket.on(WsEvent.VotingStart, (payload: VotingState) => {
-        console.log("Voting started");
-        console.log(payload);
         store.dispatch(votingActions.setVoting(payload))
       })
 
       socket.on(WsEvent.VotingVote, (payload: Vote) => {
-        console.log("Voting voted");
-        console.log(payload);
         store.dispatch(votingActions.vote(payload))
       })
 
       socket.on(WsEvent.VotingStop, (payload: VotingState) => {
-        console.log("Voting ended");
-        console.log(payload);
         store.dispatch(votingActions.setVoting(payload))
       })
 
       socket.on(WsEvent.VotingDelete, () => {
-        console.log("Voting deleted");
         store.dispatch(votingActions.deleteVoting())
       })
 

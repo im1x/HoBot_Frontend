@@ -5,7 +5,7 @@ import {
 } from "@tabler/icons-react";
 import { LinksGroup } from "./NavbarLinksGroup.tsx";
 
-const mockdata = [
+const menuData = [
   {
     label: "Настройки",
     icon: IconAdjustments,
@@ -37,7 +37,7 @@ const mockdata = [
 ];
 
 export default function NavbarNested() {
-  const links = mockdata.map((item) => (
+  const links = menuData.map((item) => (
     <LinksGroup {...item} key={item.label} />
   ));
 

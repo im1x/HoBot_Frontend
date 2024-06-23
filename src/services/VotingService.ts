@@ -5,7 +5,7 @@ import {VotingRequest, VotingState} from "../models/Voting.ts";
 export const votingApi = createApi({
   reducerPath: "votingApi",
   baseQuery: BaseQueryWithReAuth,
-  //tagTypes: ["voting"],
+  refetchOnMountOrArgChange: true,
   endpoints: (builder) => ({
 
     startVoting: builder.mutation<null, VotingRequest>({

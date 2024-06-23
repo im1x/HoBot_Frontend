@@ -15,7 +15,6 @@ const Bar: React.FC<{data: VotingResult[], colors: string[]}> =  ({ data, colors
       arcLinkLabelsStraightLength={10}
       arcLinkLabelsSkipAngle={10}
       margin={{ top: 40, right: 100, bottom: 40, left: 100 }}
-      fit={true}
       innerRadius={0.5}
       padAngle={0.7}
       cornerRadius={3}

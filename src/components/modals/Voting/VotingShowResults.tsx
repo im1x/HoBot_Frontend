@@ -14,7 +14,7 @@ const VotingShowResults: React.FC<{votingResults : VotingResult[], totalVotes: n
   }, [votingResults, totalVotes]);
 
   return (
-    <div>
+    <>
       {votingResults.map((vr, index) => (
         <Box key={index} mb="sm">
           <Flex display="flex" justify="space-between">
@@ -25,7 +25,7 @@ const VotingShowResults: React.FC<{votingResults : VotingResult[], totalVotes: n
         </Box>
       ))}
 
-    </div>
+    </>
   );
 };
 

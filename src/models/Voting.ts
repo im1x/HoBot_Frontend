@@ -10,6 +10,11 @@ export interface VotingResult {
   count: number;
 }
 
+export interface RatingResult {
+  count: number;
+  sum: number;
+}
+
 export interface Vote {
   name: string;
   vote: number;
@@ -21,6 +26,7 @@ export interface VotingState {
   isHaveResult: boolean;
   title: string;
   resultVoting: VotingResult[];
-  resultRating: number;
+  resultRating: RatingResult;
+  votes: Vote[];
   stopAt: string;
 }

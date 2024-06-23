@@ -54,9 +54,7 @@ const ResultVoting: React.FC<{ voting: VotingState }> = ({ voting }) => {
           :
             <HideResultVoting votingResults={voting.resultVoting}/>
         }
-
       </Flex>
-
     </>
   );
 };

@@ -6,6 +6,7 @@ import Feedback from "./modals/Feedback.tsx";
 import About from "./modals/About.tsx";
 import SongRequestsSettings from "./modals/settings/songRequests";
 import Voting from "./modals/Voting";
+import Rating from "./modals/Rating";
 
 type ContentComponents = {
   [key: string]: {modal: ReactNode, label: string, size?: string};
@@ -25,6 +26,7 @@ export const ModalLayout = () => {
     feedback: {modal: <Feedback />, label: "Обратная связь"},
     about: {modal: <About />, label: "О проекте"},
     voting: {modal: <Voting />, label: "Голосование", size: "100%"},
+    rating: {modal: <Rating />, label: "Оценка"},
     // Add more mappings for other parameters
   };
 
