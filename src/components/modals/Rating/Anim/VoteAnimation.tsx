@@ -39,6 +39,8 @@ const VoteAnimation: React.FC<{ voting: VotingState, getColorByNum: (rating: num
     textElement.style.color = getColorByNum(rating);
     textElement.style.fontSize = '22px';
 
+    console.log("X: " + x + " Y: " + y);
+
     // append element to container ref
     container.current?.appendChild(textElement);
 
@@ -54,9 +56,7 @@ const VoteAnimation: React.FC<{ voting: VotingState, getColorByNum: (rating: num
   };
 
   return (
-    <main>
-      <div ref={container} style={{"width": "740px", "height": "420px"}}/>
-    </main>
+    <div ref={container} style={{"width": "740px", "height": "440px"}}/>
   );
 }
 

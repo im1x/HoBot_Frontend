@@ -34,7 +34,7 @@ const ResultRating: React.FC<{ voting: VotingState }> = ({ voting }) => {
     {voting.isVotingInProgress ?
       <VoteAnimation voting={voting} getColorByNum={getColorByNum}/>
       :
-      <Text ta="center" size="xl" fw={700}
+      <Text ta="center" size="50px" fw={800} my="xl"
             c={getColorByNum(voting.resultRating.sum / voting.resultRating.count)}
       >Результат: {(voting.resultRating.sum / voting.resultRating.count).toFixed(2)}
       </Text>
