@@ -2,7 +2,7 @@ import { Suspense, useEffect, useState, lazy } from "react";
 import "./App.css";
 import { useSelector } from "react-redux";
 import { store } from "./store/store.ts";
-import {Route, Routes, useLocation} from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import { authApi } from "./services/AuthService.ts";
 import {
   selectUserState,
@@ -21,8 +21,16 @@ function App() {
   const {data: currentUser, status} = authApi.useCurrentUserQuery();
   const userStore = useSelector(selectUserState);
   const location = useLocation();
+  const navigate = useNavigate();
   const background = location.state && location.state.background;
 
+  const isModalRoute = () => location.pathname.includes("/modal/");
+
+  useEffect(() => {
+    if (isModalRoute()) {
+      navigate(location.pathname, { state: { background: location } });  // Adjust the background path as needed
+    }
+  }, []);
 
   useEffect(() => {
     if (currentUser) {
