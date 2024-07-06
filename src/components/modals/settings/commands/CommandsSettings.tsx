@@ -57,7 +57,7 @@ export const CommandsSettings = () => {
       access_level: parseInt(formAdd.getValues().access_level?.toString() || "0"),
     };
     addCommand(updatedValues).then((result) => {
-      if ("data" in result) {
+      if (result.data) {
         setCommands(result.data);
         notifications.show({
           message: "Добавлено",
@@ -89,7 +89,7 @@ export const CommandsSettings = () => {
 
   const handleDelete = (alias: string) => {
     deleteCommand(alias).then((result) => {
-      if ("data" in result) {
+      if (result.data) {
         setCommands(result.data);
         notifications.show({
           message: "Удалено",
