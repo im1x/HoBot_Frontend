@@ -1,11 +1,9 @@
 import React, {useEffect, useRef} from 'react';
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 import {VotingState} from "../../../../models/Voting.ts";
 import {votingActions} from "../../../../store/reducers/VotingSlice.ts";
 import {store} from "../../../../store/store.ts";
 
-gsap.registerPlugin(useGSAP);
 
 const VoteAnimation: React.FC<{ voting: VotingState, getColorByNum: (rating: number) => string }> = ({ voting, getColorByNum }) => {
   const container = useRef<HTMLDivElement | null>(null);
