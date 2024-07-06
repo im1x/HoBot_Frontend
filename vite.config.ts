@@ -12,5 +12,16 @@ export default defineConfig({
       },
     },
   },
+
   plugins: [react()],
+
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'animation': ['gsap', '@nivo/core', "@nivo/pie"],
+        },
+      },
+    },
+  },
 });
