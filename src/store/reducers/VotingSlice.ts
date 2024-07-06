@@ -19,12 +19,12 @@ const votingSlice = createSlice({
   reducers: {
     setVoting: (state, action: PayloadAction<VotingState>) => {
         state.type = action.payload.type;
-        state.isVotingInProgress = action.payload.isVotingInProgress;
-        state.isHaveResult = action.payload.isHaveResult;
         state.title = action.payload.title;
         state.stopAt = action.payload.stopAt;
         state.resultVoting = action.payload.resultVoting;
         state.resultRating = action.payload.resultRating;
+        state.isVotingInProgress = action.payload.isVotingInProgress;
+        state.isHaveResult = action.payload.isHaveResult;
     },
 
     deleteVoting: (state) => {
@@ -41,14 +41,11 @@ const votingSlice = createSlice({
     },
 
     vote: (state, action: PayloadAction<Vote>) => {
-      console.log("VOTE")
       if (state.type == 0) {
         state.resultVoting[action.payload.vote-1].count += 1;
       } else {
-        console.log("Rating")
-        console.log(action.payload);
         state.resultRating.count += 1;
-        state.resultRating.sum += action.payload.vote;
+        //state.resultRating.sum += action.payload.vote;
         state.votes.push(action.payload);
       }
     },
