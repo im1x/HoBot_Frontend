@@ -19,4 +19,6 @@ export interface SettingsSongRequest {
   min_video_views: number;
   max_requests_per_user: number;
   max_duration_minutes: number;
+  is_users_skip_allowed: boolean;
+  users_skip_value: number;
 }

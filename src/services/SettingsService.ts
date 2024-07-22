@@ -66,7 +66,7 @@ export const settingsApi = createApi({
         method: "POST",
         body: settings,
       }),
-      invalidatesTags: ["songRequest"],
+      invalidatesTags: ["songRequest", "commands"],
     }),
 
     getSongRequestsSettings: builder.query<SettingsSongRequest, void>({
