@@ -65,7 +65,7 @@ const Login = () => {
 
            </List>
            <Text mt={30} ta="center" c="orange">Помните, что для нормальной работы бота ему необходимы права модератора!</Text>
-           <Text mb={15} ta="center" c="orange">Выдать права боту можно командой "/mod HoBOT"</Text>
+           <Text mb={15} ta="center" c="orange">Выдать права боту можно командой "/mod channel HoBOT"</Text>
          </Spoiler>
         <Center>
           <Link to={redirect_uri}>
