@@ -6,7 +6,7 @@ const VotingShowResults: React.FC<{votingResults : VotingResult[]}> = ({ votingR
   return (
     <div>
       {votingResults.map((vr, index) => (
-        <Text key={index}>{index + 1}. {vr.label}</Text>
+        <Text key={index} size="xl">{index + 1}. {vr.label}</Text>
       ))}
     </div>
   );

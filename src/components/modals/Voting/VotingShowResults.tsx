@@ -18,8 +18,8 @@ const VotingShowResults: React.FC<{votingResults : VotingResult[], totalVotes: n
       {votingResults.map((vr, index) => (
         <Box key={index} mb="sm">
           <Flex display="flex" justify="space-between">
-            <Text span>{index + 1}. {vr.label}</Text>
-            <Text span ta="right">{calculatePercentage(index)}% ({vr.count})</Text>
+            <Text span size="xl">{index + 1}. {vr.label}</Text>
+            <Text span size="xl" ta="right">{calculatePercentage(index)}% ({vr.count})</Text>
           </Flex>
           <Progress radius="md" size="xl" color={colors[index]} value={calculatePercentage(index)} />
         </Box>

@@ -4,7 +4,6 @@ import Countdown from "../../Countdown";
 import {Box, Button, Center, Checkbox, Flex, Group, Text} from "@mantine/core";
 import { votingApi } from "../../../services/VotingService.ts";
 import VotingShowResults from "./VotingShowResults.tsx";
-import Pie from "../../Nivo/Pie.tsx";
 import {votingActions} from "../../../store/reducers/VotingSlice.ts";
 import {store} from "../../../store/store.ts";
 import HideResultVoting from "./HideResultVoting.tsx";
@@ -43,14 +42,9 @@ const ResultVoting: React.FC<{ voting: VotingState }> = ({ voting }) => {
 
       <Flex justify="space-evenly" align="center" m="lg">
         {!isHideResult || !voting.isVotingInProgress ?
-            <>
-              <Box flex="1">
-                <VotingShowResults votingResults={voting.resultVoting} totalVotes={totalVotes} colors={colors}/>
-              </Box>
-                <Box w="50%" h="350px" style={totalVotes > 0 ? {} : { visibility: 'hidden' }}>
-                  <Pie data={voting.resultVoting} colors={colors}/>
-                </Box>
-            </>
+            <Box flex="1">
+              <VotingShowResults votingResults={voting.resultVoting} totalVotes={totalVotes} colors={colors}/>
+            </Box>
           :
             <HideResultVoting votingResults={voting.resultVoting}/>
         }

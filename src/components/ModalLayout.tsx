@@ -25,7 +25,7 @@ export const ModalLayout = () => {
     songRequestsSettings: {modal: <SongRequestsSettings />, label: "Настройки заказа песен"},
     feedback: {modal: <Feedback />, label: "Обратная связь"},
     about: {modal: <About />, label: "О проекте"},
-    voting: {modal: <Voting />, label: "Голосование", size: "100%"},
+    voting: {modal: <Voting />, label: "Голосование"},
     rating: {modal: <Rating />, label: "Оценка"},
     // Add more mappings for other parameters
   };
