@@ -29,6 +29,9 @@ const ResultRating: React.FC<{ voting: VotingState }> = ({ voting }) => {
         <Button mb={25} onClick={()=> store.dispatch(votingActions.deleteVoting())}>Новое голосование</Button>
       </Center>
     }
+    {voting.title !== "" &&
+      <Text ta="center" size="xl" fw={700}>Заголовок: {voting.title}</Text>
+    }
     <Text ta="center" size="xl" fw={700}>Всего оценок: {voting.resultRating.count}</Text>
 
     {voting.isVotingInProgress ?
