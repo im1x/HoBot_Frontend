@@ -29,9 +29,9 @@ const menuData = [
     icon: IconHelp,
     initiallyOpened: true,
     links: [
-      { label: "О проекте", link: "/modal/about", modal: true },
-      { label: "Обратная связь", link: "/modal/feedback", modal: true },
       { label: "Помощь по командам", link: "/p/help" },
+      { label: "Обратная связь", link: "/modal/feedback", modal: true },
+      { label: "О проекте", link: "/modal/about", modal: true },
     ],
   },
 ];
