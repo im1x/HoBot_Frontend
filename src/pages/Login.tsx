@@ -7,11 +7,11 @@ import {
 
 import {Link, useSearchParams} from "react-router";
 import logo from "../assets/logo.png";
-import vkplLogo from "../assets/vkpl.png";
+import vkvlLogo from "../assets/vkvl.png";
 import StatusNotStreamer from "../components/StatusNotStreamer.tsx";
 const Login = () => {
   const [queryParameters] = useSearchParams();
-  const redirect_uri = "https://auth.vkplay.live/app/oauth2/authorize?client_id=c99moea4ax1945tr&redirect_uri=" + import.meta.env.VITE_API_URL + "vkpl&response_type=code";
+  const redirect_uri = "https://auth.live.vkvideo.ru/app/oauth2/authorize?client_id=c99moea4ax1945tr&redirect_uri=" + import.meta.env.VITE_API_URL + "vkpl&response_type=code";
   return (
     <Center mih="100vh">
       <Box>
@@ -25,7 +25,7 @@ const Login = () => {
 
          <Spoiler maxHeight={90} showLabel="Подробности" hideLabel="Скрыть">
            <Text size="lg" ta={"center"} fw={500} mb="lg">
-             Это бот дл VK Play Live. Он позволяет зрителям заказывать видео с YouTube, а стримерам делать голосования и создавать свои команды.
+             Это бот дл VK Video Live. Он позволяет зрителям заказывать видео с YouTube, а стримерам делать голосования и создавать свои команды.
            </Text>
 
            <List mt={40} fw={500} maw={640} listStyleType="disc">
@@ -69,12 +69,12 @@ const Login = () => {
          </Spoiler>
         <Center>
           <Link to={redirect_uri}>
-            <Button size="lg" color="#0077ff">
+            <Button size="lg" color="#005bc3">
               <Image
                 mr="md"
-                w="45px"
+                w="38px"
                 fit="contain"
-                src={vkplLogo}
+                src={vkvlLogo}
               />
               Войти
             </Button>
