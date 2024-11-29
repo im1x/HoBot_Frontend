@@ -11,6 +11,13 @@ const SongRequestsSettings = () => {
   const [saveSongRequestsSettings] = settingsApi.useSaveSongRequestsSettingsMutation();
 
   const formSettings = useForm<SettingsSongRequest>({
+    initialValues: {
+      min_video_views: 0,
+      max_requests_per_user: 0,
+      max_duration_minutes: 0,
+      is_users_skip_allowed: false,
+      users_skip_value: 0
+    },
     validate: {
       min_video_views: isInRange({ min: 1, max: 100000000 },'Значение должно быть 1 - 100 000 000'),
       max_requests_per_user: isInRange({ min: 0, max: 30 },'Значение должно быть 0 - 30'),
@@ -21,7 +28,6 @@ const SongRequestsSettings = () => {
   useEffect(() => {
     if (songRequestsSettings) {
       formSettings.setValues(songRequestsSettings);
-      console.log(songRequestsSettings);
     }
   }, [songRequestsSettings]);
 
