@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import {Modal} from "@mantine/core";
 import { ReactNode } from "react";
 import {CommandsSettings} from "./modals/settings/commands/CommandsSettings.tsx";

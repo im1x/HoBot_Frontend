@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import {useParams} from "react-router";
 import {songRequestApi} from "../services/SongRequestService.ts";
 import { useEffect, useState } from "react";
 import {Anchor, Box, Table} from "@mantine/core";

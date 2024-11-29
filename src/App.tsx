@@ -2,7 +2,7 @@ import { Suspense, useEffect, useState, lazy } from "react";
 import "./App.css";
 import { useSelector } from "react-redux";
 import { store } from "./store/store.ts";
-import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate} from "react-router";
 import { authApi } from "./services/AuthService.ts";
 import {
   selectUserState,
@@ -49,7 +49,9 @@ function App() {
           <Suspense fallback={<></>}>
             <Routes location={background || location}>
               <Route path="/" element={userStore.isAuth ? <Main/> : <Login/>}>
-                <Route path="/modal/:id" element={<ModalLayout/>}/>
+                <Route path="modal">
+                  <Route path=":id" element={<ModalLayout />} />
+                </Route>
               </Route>
               <Route path="/:id" element={<PublicPlaylist/>}/>
               <Route path="/p/help" element={<Help/>}/>
@@ -57,7 +59,9 @@ function App() {
             </Routes>
             {background && (
               <Routes>
-                <Route path="modal/:id" element={<ModalLayout/>}/>
+                <Route path="modal">
+                  <Route path=":id" element={<ModalLayout />} />
+                </Route>
               </Routes>
             )}
           </Suspense>

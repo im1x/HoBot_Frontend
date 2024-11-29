@@ -5,7 +5,7 @@ import {
   Image, Center, Box, List, Spoiler,
 } from '@mantine/core';
 
-import {Link, useSearchParams} from "react-router-dom";
+import {Link, useSearchParams} from "react-router";
 import logo from "../assets/logo.png";
 import vkplLogo from "../assets/vkpl.png";
 import StatusNotStreamer from "../components/StatusNotStreamer.tsx";

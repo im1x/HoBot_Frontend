@@ -9,7 +9,7 @@ import {
 } from "@mantine/core";
 import { IconChevronRight } from "@tabler/icons-react";
 import classes from "./NavbarNested.module.css";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router";
 
 interface LinksGroupProps {
   icon: React.FC<any>;
