@@ -1,8 +1,8 @@
 import {useParams} from "react-router";
-import {songRequestApi} from "../services/SongRequestService.ts";
+import {songRequestApi} from "@services/SongRequestService";
 import { useEffect, useState } from "react";
 import {Anchor, Box, Table} from "@mantine/core";
-import {SongRequestVideo} from "../models/SongRequest.ts";
+import {SongRequestVideo} from "@models/SongRequest";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import {notifications} from "@mantine/notifications";

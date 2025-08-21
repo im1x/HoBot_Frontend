@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {RootState} from "../store.ts";
-import {Vote, VotingState} from "../../models/Voting.ts";
+import {RootState} from "@store/store";
+import {Vote, VotingState} from "@models/Voting";
 
 const initialState: VotingState = {
   type: 0,

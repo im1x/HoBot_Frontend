@@ -1,15 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { authApi } from "../services/AuthService.ts";
-import userReducer from "./reducers/UserSlice";
-import webSocketSlice from "./reducers/WebSocketSlice.ts";
-import webSocketMiddleware from "../middleware/webSocketMiddleware.tsx";
-import {settingsApi} from "../services/SettingsService.ts";
-import songRequestSlice from "./reducers/SongRequestSlice.ts";
-import {songRequestApi} from "../services/SongRequestService.ts";
-import {commonApi} from "../services/CommonService.ts";
-import {votingApi} from "../services/VotingService.ts";
-import votingSlice from "./reducers/VotingSlice.ts";
+import { authApi } from "@services/AuthService";
+import userReducer from "@store/reducers/UserSlice";
+import webSocketSlice from "@store/reducers/WebSocketSlice";
+import webSocketMiddleware from "@middleware/webSocketMiddleware";
+import { settingsApi } from "@services/SettingsService";
+import songRequestSlice from "@store/reducers/SongRequestSlice";
+import { songRequestApi } from "@services/SongRequestService";
+import { commonApi } from "@services/CommonService";
+import { votingApi } from "@services/VotingService";
+import votingSlice from "@store/reducers/VotingSlice";
 
 export const store = configureStore({
   reducer: {

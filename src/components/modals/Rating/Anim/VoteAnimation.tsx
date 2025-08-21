@@ -1,8 +1,8 @@
 import React, {useEffect, useRef} from 'react';
 import gsap from 'gsap';
-import {VotingState} from "../../../../models/Voting.ts";
-import {votingActions} from "../../../../store/reducers/VotingSlice.ts";
-import {store} from "../../../../store/store.ts";
+import {VotingState} from "@models/Voting";
+import {votingActions} from "@store/reducers/VotingSlice";
+import {store} from "@store/store";
 
 
 const VoteAnimation: React.FC<{ voting: VotingState, getColorByNum: (rating: number) => string }> = ({ voting, getColorByNum }) => {

@@ -1,5 +1,5 @@
 import React, {useCallback} from "react";
-import {SongRequestVideo} from "../../models/SongRequest.ts";
+import {SongRequestVideo} from "@models/SongRequest";
 import styles from "./Playlist.module.css";
 import {ActionIcon, Anchor, Box, Divider, Flex, Paper, Text, ThemeIcon, Tooltip} from "@mantine/core";
 import {
@@ -9,7 +9,7 @@ import {
 } from "@tabler/icons-react";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import {songRequestApi} from "../../services/SongRequestService.ts";
+import {songRequestApi} from "@services/SongRequestService";
 
 dayjs.extend(duration)
 const Playlist: React.FC<{ playlist: SongRequestVideo[] }> = ({ playlist }) => {

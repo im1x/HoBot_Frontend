@@ -1,4 +1,4 @@
-import {VotingResult} from "../../../models/Voting.ts";
+import {VotingResult} from "@models/Voting";
 import React, {useCallback} from "react";
 import {Box, Flex, Progress, Text} from "@mantine/core";
 

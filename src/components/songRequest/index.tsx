@@ -1,14 +1,14 @@
-import Player from "./Player.tsx";
-import Playlist from "./Playlist.tsx";
-import Controls from "./Controls.tsx";
+import Player from "./Player";
+import Playlist from "./Playlist";
+import Controls from "./Controls";
 import {useSelector} from "react-redux";
-import {selectSongRequest, songRequestActions} from "../../store/reducers/SongRequestSlice.ts";
-import {store} from "../../store/store.ts";
-import {songRequestApi} from "../../services/SongRequestService.ts";
+import {selectSongRequest, songRequestActions} from "@store/reducers/SongRequestSlice";
+import {store} from "@store/store";
+import {songRequestApi} from "@services/SongRequestService";
 import {useEffect} from "react";
 import {Box, em} from "@mantine/core";
 import {useMediaQuery} from "@mantine/hooks";
-import {settingsApi} from "../../services/SettingsService.ts";
+import {settingsApi} from "@services/SettingsService";
 
 const SongRequest = () => {
   const sr = useSelector(selectSongRequest);

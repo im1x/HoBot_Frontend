@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {RootState} from "../store.ts";
-import {WsEvent} from "../../middleware/webSocketMiddleware.tsx";
+import {RootState} from "@store/store";
+import {WsEvent} from "@middleware/webSocketMiddleware";
 
 export interface WsState {
   messages: WsMessage[],

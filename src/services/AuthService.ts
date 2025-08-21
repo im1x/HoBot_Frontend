@@ -1,6 +1,6 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
-import {BaseQueryWithReAuth} from "./BaseQueryWithReAuth.ts";
-import {User} from "../models/User.ts";
+import {BaseQueryWithReAuth} from "@services/BaseQueryWithReAuth";
+import {User} from "@models/User";
 
 // Define a service using a base URL and expected endpoints
 export const authApi = createApi({

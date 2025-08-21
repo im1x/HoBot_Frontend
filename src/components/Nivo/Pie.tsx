@@ -1,7 +1,7 @@
 import React from "react";
-import Theme from "./Theme.ts";
+import Theme from "./Theme";
 import {ResponsivePie} from "@nivo/pie";
-import {VotingResult} from "../../models/Voting.ts";
+import {VotingResult} from "@models/Voting";
 
 const Bar: React.FC<{data: VotingResult[], colors: string[]}> =  ({ data, colors }) => {
   return (

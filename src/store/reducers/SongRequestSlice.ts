@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store.ts";
+import { RootState } from "@store/store";
 import {
   SongRequestState,
   SongRequestVideo,
-} from "../../models/SongRequest.ts";
+} from "@models/SongRequest";
 
 const VIDEO_WAITING_ID = "uBBDMqZKagY";
 

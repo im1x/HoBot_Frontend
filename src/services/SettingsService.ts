@@ -1,6 +1,6 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
-import {BaseQueryWithReAuth} from "./BaseQueryWithReAuth.ts";
-import {SettingsCommand, SettingsCommandsList, SettingsSongRequest} from "../models/response/SettingsResponse.ts";
+import {BaseQueryWithReAuth} from "@services/BaseQueryWithReAuth";
+import {SettingsCommand, SettingsCommandsList, SettingsSongRequest} from "@models/response/SettingsResponse";
 
 export const settingsApi = createApi({
   reducerPath: "settingsApi",

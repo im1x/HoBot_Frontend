@@ -8,9 +8,9 @@ import {
   IconVolume
 } from "@tabler/icons-react";
 import React from "react";
-import {songRequestActions} from "../../store/reducers/SongRequestSlice.ts";
-import {store} from "../../store/store.ts";
-import {SongRequestState} from "../../models/SongRequest.ts";
+import {songRequestActions} from "@store/reducers/SongRequestSlice";
+import {store} from "@store/store";
+import {SongRequestState} from "@models/SongRequest";
 import {modals} from "@mantine/modals";
 
 const Controls: React.FC<{

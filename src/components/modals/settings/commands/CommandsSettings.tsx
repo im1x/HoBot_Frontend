@@ -1,4 +1,4 @@
-import { settingsApi } from "../../../../services/SettingsService.ts";
+import { settingsApi } from "@services/SettingsService";
 import {
   ActionIcon,
   Divider,
@@ -10,7 +10,7 @@ import {
   TextInput,
 } from "@mantine/core";
 import { hasLength, useForm } from "@mantine/form";
-import { SettingsCommand } from "../../../../models/response/SettingsResponse.ts";
+import { SettingsCommand } from "@models/response/SettingsResponse";
 import React, { useCallback, useEffect, useState } from "react";
 import { notifications } from "@mantine/notifications";
 import { IconCheck, IconPlus, IconX } from "@tabler/icons-react";

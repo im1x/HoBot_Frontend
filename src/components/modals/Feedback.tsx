@@ -1,6 +1,6 @@
 import {Button, Center, Textarea} from "@mantine/core";
 import { useState } from "react";
-import {commonApi} from "../../services/CommonService.ts";
+import {commonApi} from "@services/CommonService";
 import {notifications} from "@mantine/notifications";
 import {IconCheck, IconX} from "@tabler/icons-react";
 

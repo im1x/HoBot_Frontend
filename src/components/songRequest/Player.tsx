@@ -1,7 +1,7 @@
 import React from "react";
 import ReactPlayer from 'react-player/youtube';
-import {store} from "../../store/store.ts";
-import {setProgress} from "../../store/reducers/SongRequestSlice.ts";
+import {store} from "@store/store";
+import {setProgress} from "@store/reducers/SongRequestSlice";
 
 const SongRequestPlayer: React.FC<{
   videoId: string,

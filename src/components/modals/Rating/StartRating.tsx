@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import {VotingRequest} from "../../../models/Voting.ts";
-import {votingApi} from "../../../services/VotingService.ts";
+import {VotingRequest} from "@models/Voting";
+import {votingApi} from "@services/VotingService";
 import {Box, Button, Center, NumberInput, TextInput, Text} from "@mantine/core";
 import dayjs from "dayjs";
 

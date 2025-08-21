@@ -1,10 +1,10 @@
-import {votingApi} from "../../../services/VotingService.ts";
+import {votingApi} from "@services/VotingService";
 import {useEffect, useState} from "react";
-import {store} from "../../../store/store.ts";
-import {selectVoting, votingActions} from "../../../store/reducers/VotingSlice.ts";
+import {store} from "@store/store";
+import {selectVoting, votingActions} from "@store/reducers/VotingSlice";
 import {useSelector} from "react-redux";
-import StartRating from "./StartRating.tsx";
-import ResultRating from "./ResultRating.tsx";
+import StartRating from "./StartRating";
+import ResultRating from "./ResultRating";
 
 const Rating = () => {
   const voting = useSelector(selectVoting);

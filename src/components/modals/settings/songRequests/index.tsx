@@ -1,6 +1,6 @@
-import {settingsApi} from "../../../../services/SettingsService.ts";
+import {settingsApi} from "@services/SettingsService";
 import {isInRange, useForm} from "@mantine/form";
-import {SettingsSongRequest} from "../../../../models/response/SettingsResponse.ts";
+import {SettingsSongRequest} from "@models/response/SettingsResponse";
 import {Button, Center, Checkbox, Fieldset, Flex, NumberInput, Text} from "@mantine/core";
 import { useEffect } from "react";
 import {notifications} from "@mantine/notifications";

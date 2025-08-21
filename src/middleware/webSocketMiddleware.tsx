@@ -1,12 +1,12 @@
 import { Middleware } from 'redux'
 import {io, Socket} from 'socket.io-client';
-import { webSocketActions, WsMessage } from '../store/reducers/WebSocketSlice.ts';
-import {songRequestActions} from "../store/reducers/SongRequestSlice.ts";
-import {SongRequestVideo} from "../models/SongRequest.ts";
-import {authApi} from "../services/AuthService.ts";
-import {AppDispatch} from "../store/store.ts";
-import {Vote, VotingState} from "../models/Voting.ts";
-import {votingActions} from "../store/reducers/VotingSlice.ts";
+import { webSocketActions, WsMessage } from '@store/reducers/WebSocketSlice';
+import {songRequestActions} from "@store/reducers/SongRequestSlice";
+import {SongRequestVideo} from "@models/SongRequest";
+import {authApi} from "@services/AuthService";
+import {AppDispatch} from "@store/store";
+import {Vote, VotingState} from "@models/Voting";
+import {votingActions} from "@store/reducers/VotingSlice";
 
 export enum WsEvent {
   SendMessage = 'send_message',

@@ -13,9 +13,9 @@ import {
 } from "@tabler/icons-react";
 import classes from "./UserButton.module.css";
 import {modals} from "@mantine/modals";
-import {authApi} from "../../services/AuthService.ts";
+import {authApi} from "@services/AuthService";
 import {useSelector} from "react-redux";
-import {selectUserState} from "../../store/reducers/UserSlice.ts";
+import {selectUserState} from "@store/reducers/UserSlice";
 
 const UserButton = () => {
   const userStore = useSelector(selectUserState);

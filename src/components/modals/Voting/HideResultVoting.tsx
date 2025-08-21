@@ -1,5 +1,5 @@
 import React from "react";
-import {VotingResult} from "../../../models/Voting.ts";
+import {VotingResult} from "@models/Voting";
 import {Text} from "@mantine/core";
 
 const VotingShowResults: React.FC<{votingResults : VotingResult[]}> = ({ votingResults}) => {

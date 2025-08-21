@@ -1,7 +1,7 @@
 import {Button, Center, CloseButton, NumberInput, TextInput, Text, Box} from "@mantine/core";
-import {votingApi} from "../../../services/VotingService.ts";
+import {votingApi} from "@services/VotingService";
 import {useMemo, useState} from "react";
-import {VotingRequest} from "../../../models/Voting.ts";
+import {VotingRequest} from "@models/Voting";
 import {IconPlus} from "@tabler/icons-react";
 import dayjs from "dayjs";
 

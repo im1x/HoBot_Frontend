@@ -1,4 +1,4 @@
-import { SettingsCommand } from "../../../../models/response/SettingsResponse.ts";
+import { SettingsCommand } from "@models/response/SettingsResponse";
 import React from "react";
 import {ActionIcon, Table} from "@mantine/core";
 import {IconPencil, IconTrash} from "@tabler/icons-react";

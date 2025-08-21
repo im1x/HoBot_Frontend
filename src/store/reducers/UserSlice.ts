@@ -1,7 +1,7 @@
-import { User } from "../../models/User.ts";
+import { User } from "@models/User";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AuthResponse } from "../../models/response/AuthResponse.ts";
-import { RootState } from "../store.ts";
+import { AuthResponse } from "@models/response/AuthResponse";
+import { RootState } from "@store/store";
 
 interface UserState {
   user: User | null;

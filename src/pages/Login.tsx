@@ -6,9 +6,9 @@ import {
 } from '@mantine/core';
 
 import {Link, useSearchParams} from "react-router";
-import logo from "../assets/logo.png";
-import vkvlLogo from "../assets/vkvl.png";
-import StatusNotStreamer from "../components/StatusNotStreamer.tsx";
+import logo from "@assets/logo.png";
+import vkvlLogo from "@assets/vkvl.png";
+import StatusNotStreamer from "@components/StatusNotStreamer";
 const Login = () => {
   const [queryParameters] = useSearchParams();
   const redirect_uri = "https://auth.live.vkvideo.ru/app/oauth2/authorize?client_id=c99moea4ax1945tr&redirect_uri=" + import.meta.env.VITE_API_URL + "vkpl&response_type=code";

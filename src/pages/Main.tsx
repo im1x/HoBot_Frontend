@@ -1,8 +1,8 @@
-import NavBar from "../components/Navbar";
-import SongRequest from "../components/songRequest";
-import logo from "../assets/logo.png";
+import NavBar from "@components/Navbar";
+import SongRequest from "@components/songRequest";
+import logo from "@assets/logo.png";
 import {Center} from "@mantine/core";
-import UserButton from "../components/UserButton";
+import UserButton from "@components/UserButton";
 const Main = () => {
   return (
   <div style={{display: "flex"}}>

@@ -1,6 +1,6 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
-import {BaseQueryWithReAuth} from "./BaseQueryWithReAuth.ts";
-import {PlaylistAndHistory, SongRequestVideo} from "../models/SongRequest.ts";
+import {BaseQueryWithReAuth} from "@services/BaseQueryWithReAuth";
+import {PlaylistAndHistory, SongRequestVideo} from "@models/SongRequest";
 
 export const songRequestApi = createApi({
   reducerPath: "songRequestApi",

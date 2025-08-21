@@ -1,8 +1,8 @@
 import React from "react";
 import { Table } from "@mantine/core";
-import { SettingsCommand } from "../../../../models/response/SettingsResponse.ts";
-import ReadOnlyRow from "./ReadOnlyRow.tsx";
-import EditableRow from "./EditableRow.tsx";
+import { SettingsCommand } from "@models/response/SettingsResponse";
+import ReadOnlyRow from "./ReadOnlyRow";
+import EditableRow from "./EditableRow";
 import { UseFormReturnType } from "@mantine/form";
 
 const CommandTable: React.FC<{

@@ -1,7 +1,7 @@
 import {BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError} from "@reduxjs/toolkit/query/react";
-import {AuthResponse} from "../models/response/AuthResponse.ts";
-import {store} from "../store/store.ts";
-import {clearAuth, setAuth} from "../store/reducers/UserSlice.ts";
+import {AuthResponse} from "@models/response/AuthResponse";
+import {store} from "@store/store";
+import {clearAuth, setAuth} from "@store/reducers/UserSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL,

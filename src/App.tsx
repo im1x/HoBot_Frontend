@@ -1,20 +1,21 @@
 import { Suspense, useEffect, useState, lazy } from "react";
 import "./App.css";
 import { useSelector } from "react-redux";
-import { store } from "./store/store.ts";
+import { store } from "@store/store";
 import {Route, Routes, useLocation, useNavigate} from "react-router";
-import { authApi } from "./services/AuthService.ts";
+import { authApi } from "@services/AuthService";
+
 import {
   selectUserState,
   setAuthState,
   setUser,
-} from "./store/reducers/UserSlice.ts";
-import { webSocketActions } from "./store/reducers/WebSocketSlice.ts";
-import ModalLayout from "./components/ModalLayout.tsx";
-import Help from "./pages/Help.tsx";
-const Login = lazy(() => import('./pages/Login'));
-const Main = lazy(() => import('./pages/Main'));
-const PublicPlaylist = lazy(() => import('./pages/PublicPlaylist'));
+} from "@store/reducers/UserSlice";
+import { webSocketActions } from "@store/reducers/WebSocketSlice";
+import ModalLayout from "@components/ModalLayout";
+import Help from "@pages/Help";
+const Login = lazy(() => import('@pages/Login'));
+const Main = lazy(() => import('@pages/Main'));
+const PublicPlaylist = lazy(() => import('@pages/PublicPlaylist'));
 
 function App() {
   const [isReadyForLoading, setIsReadyForLoading] = useState(false);

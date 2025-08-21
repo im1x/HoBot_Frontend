@@ -1,12 +1,12 @@
-import { VotingState } from "../../../models/Voting.ts";
+import { VotingState } from "@models/Voting";
 import React, {useMemo, useState} from "react";
-import Countdown from "../../Countdown";
+import Countdown from "@components/Countdown";
 import {Box, Button, Center, Checkbox, Flex, Group, Text} from "@mantine/core";
-import { votingApi } from "../../../services/VotingService.ts";
-import VotingShowResults from "./VotingShowResults.tsx";
-import {votingActions} from "../../../store/reducers/VotingSlice.ts";
-import {store} from "../../../store/store.ts";
-import HideResultVoting from "./HideResultVoting.tsx";
+import { votingApi } from "@services/VotingService";
+import VotingShowResults from "./VotingShowResults";
+import {votingActions} from "@store/reducers/VotingSlice";
+import {store} from "@store/store";
+import HideResultVoting from "./HideResultVoting";
 
 const ResultVoting: React.FC<{ voting: VotingState }> = ({ voting }) => {
   const colors = ['#FF6347', '#32CD32', '#4682B4', '#FF69B4', '#8B4513', '#9932CC', '#2E8B57', '#FFC300', '#8B0000', '#20B2AA'];

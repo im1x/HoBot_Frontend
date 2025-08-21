@@ -1,11 +1,11 @@
 import React from "react";
-import {VotingState} from "../../../models/Voting.ts";
+import {VotingState} from "@models/Voting";
 import {Box, Button, Center, Text} from "@mantine/core";
-import Countdown from "../../Countdown";
-import VoteAnimation from "./Anim/VoteAnimation.tsx";
-import {votingApi} from "../../../services/VotingService.ts";
-import {store} from "../../../store/store.ts";
-import {votingActions} from "../../../store/reducers/VotingSlice.ts";
+import Countdown from "@components/Countdown";
+import VoteAnimation from "./Anim/VoteAnimation";
+import {votingApi} from "@services/VotingService";
+import {store} from "@store/store";
+import {votingActions} from "@store/reducers/VotingSlice";
 
 const ResultRating: React.FC<{ voting: VotingState }> = ({ voting }) => {
   const [stopVoting] = votingApi.useStopVotingMutation();
