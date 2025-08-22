@@ -9,7 +9,7 @@ const StartRating: React.FC = () => {
     type: 1,
     title: "",
     options: [],
-    duration: 3,
+    duration: 1,
     stopAt: ""});
   const [startVoting] = votingApi.useStartVotingMutation();
 

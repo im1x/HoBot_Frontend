@@ -10,7 +10,7 @@ const StartVoting = () => {
     type: 0,
     title: "",
     options: ["", ""],
-    duration: 3,
+    duration: 1,
     stopAt: ""});
   const [startVoting] = votingApi.useStartVotingMutation();
 
