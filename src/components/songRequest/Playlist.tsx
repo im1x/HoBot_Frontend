@@ -26,6 +26,7 @@ const Playlist: React.FC<{ playlist: SongRequestVideo[] }> = ({ playlist }) => {
       {playlist.slice(0, 10).map((video: SongRequestVideo, index) => (
         <Tooltip
           color="gray"
+          className="glass-strong"
           multiline
           w={350}
           withArrow
@@ -45,7 +46,7 @@ const Playlist: React.FC<{ playlist: SongRequestVideo[] }> = ({ playlist }) => {
             radius="md"
             withBorder p="5px"
             display="flex"
-            className={styles.playlistElement}
+            className={`${styles.playlistElement} glass`}
             key={index}
             bg={index === 0 ? "var(--mantine-color-blue-filled)" : undefined}>
               <Anchor href={`https://youtube.com/watch?v=${video.yt_id}`} target="_blank" ml="xs" c="var(--mantine-color-text)" truncate="end" w={"100%"}>
