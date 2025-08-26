@@ -22,6 +22,7 @@
     "@types/react-redux": "^7.1.33",
     "dayjs": "^1.11.10",
     "gsap": "^3.12.5",
+    "motion": "^12.23.12",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-player": "^2.16.1",
