@@ -36,7 +36,8 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'animation': ['gsap', '@nivo/core', "@nivo/pie"],
+          'animation': ['gsap', '@nivo/core', "@nivo/pie", "framer-motion"],
+          'mantine': ['@mantine/core', '@mantine/hooks', '@mantine/form', '@mantine/modals', '@mantine/notifications'],
         },
       },
     },
