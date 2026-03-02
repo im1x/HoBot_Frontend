@@ -17,8 +17,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Debug secrets
+        run: |
+          echo "SFTP_HOST: ${{ secrets.SFTP_HOST }}"
+          echo "SFTP_PORT: ${{ secrets.SFTP_PORT }}"
+          echo "SFTP_USER: ${{ secrets.SFTP_USER }}"
 
       - name: Install dependencies
         run: npm ci
@@ -45,7 +51,7 @@ jobs:
           lftp -u "$SFTP_USER","$LFTP_PASSWORD" sftp://"$SFTP_HOST":"$SFTP_PORT" << EOF
           set net:timeout 30
           set sftp:connect-timeout 30
-          mirror --verbose -R --delete --parallel=3 ./dist /www
+          mirror --verbose -R --delete --parallel=3 ./dist www
           bye
           EOF
 
