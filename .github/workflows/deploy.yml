@@ -1,0 +1,53 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Add server to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p ${{ secrets.SFTP_PORT }} -H ${{ secrets.SFTP_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to server via SFTP
+        env:
+          SFTP_HOST: ${{ secrets.SFTP_HOST }}
+          SFTP_USER: ${{ secrets.SFTP_USER }}
+          SFTP_PORT: ${{ secrets.SFTP_PORT }}
+          LFTP_PASSWORD: ${{ secrets.SFTP_PASS }}
+        run: |
+          # Install lftp
+          sudo apt-get update && sudo apt-get install -y lftp
+
+          # Connect via SFTP and sync the build (delete orphans)
+          lftp -u "$SFTP_USER","$LFTP_PASSWORD" sftp://"$SFTP_HOST":"$SFTP_PORT" << EOF
+          set net:timeout 30
+          set sftp:connect-timeout 30
+          mirror --verbose -R --delete --parallel=3 ./dist /www
+          bye
+          EOF
+
+      - name: Verify deployment
+        run: echo "Deployment completed successfully!"
